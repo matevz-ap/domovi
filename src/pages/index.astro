@@ -1,11 +1,264 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import data from '../data/porocilo.json';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const { grandTotals, reportDate, regions } = data.data;
+const { allApplications, allApplicants } = grandTotals;
+
+// Calculate key metrics
+const occupied = allApplications.capacity - allApplications.freeSpots;
+const occupancyPercent = ((occupied / allApplications.capacity) * 100).toFixed(2);
+const applicantsPerSpot = allApplications.freeSpots > 0
+  ? Math.round(allApplicants.active / allApplications.freeSpots)
+  : allApplicants.active;
+const avgApplicationsPerFacility = Math.round(allApplications.active / regions.reduce((acc, r) => acc + r.facilities.length, 0));
+
+// Status determination
+const isCritical = allApplications.freeSpots < 50;
+const statusColor = isCritical ? 'error' : allApplications.freeSpots < 200 ? 'warning' : 'success';
+const statusText = isCritical ? 'KRITIČNO' : allApplications.freeSpots < 200 ? 'OMEJENO' : 'NORMALNO';
+
+// Format numbers
+const formatNumber = (num: number) => num.toLocaleString('sl-SI');
+
+// Get facilities with free spots
+const facilitiesWithSpots = regions.flatMap(r =>
+  r.facilities.filter(f => f.freeSpots && f.freeSpots > 0).map(f => ({ ...f, region: r.name }))
+);
 ---
 
 <Layout>
-	<Welcome />
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Header -->
+    <header class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Domovi za starejše</h1>
+      <p class="text-base-content/60">Pregled zasedenosti v Sloveniji</p>
+      <p class="text-sm text-base-content/40 mt-2">Podatki z dne: {reportDate}</p>
+    </header>
+
+    <!-- Main Status Banner -->
+    <div class={`alert alert-${statusColor} mb-8 justify-center`}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        {isCritical ? (
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        ) : (
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        )}
+      </svg>
+      <div class="text-center">
+        <span class="font-bold text-lg">Stanje kapacitet: {statusText}</span>
+        <span class="hidden sm:inline"> — Na voljo je samo {formatNumber(allApplications.freeSpots)} mest od {formatNumber(allApplications.capacity)}</span>
+      </div>
+    </div>
+
+    <!-- Capacity Progress -->
+    <div class="card bg-base-100 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title justify-center text-2xl mb-4">Zasedenost kapacitet</h2>
+
+        <div class="flex justify-between text-sm mb-2">
+          <span>Zasedeno: {formatNumber(occupied)}</span>
+          <span class="font-bold text-3xl text-error">{occupancyPercent}%</span>
+          <span>Kapaciteta: {formatNumber(allApplications.capacity)}</span>
+        </div>
+
+        <!-- Custom capacity bar -->
+        <div class="w-full h-8 bg-base-300 rounded-full overflow-hidden relative">
+          <div
+            class="h-full bg-gradient-to-r from-success via-warning to-error transition-all duration-1000"
+            style={`width: ${occupancyPercent}%`}
+          ></div>
+          <div class="absolute inset-0 flex items-center justify-end pr-2">
+            <span class="badge badge-success badge-sm">{formatNumber(allApplications.freeSpots)} prostih</span>
+          </div>
+        </div>
+
+        <!-- Visual blocks representation -->
+        <div class="mt-4 flex flex-wrap gap-0.5">
+          {Array.from({ length: 100 }).map((_, i) => (
+            <div
+              class={`w-2 h-4 rounded-sm ${i < Math.round(Number(occupancyPercent)) ? 'bg-error' : 'bg-success'}`}
+            ></div>
+          ))}
+        </div>
+        <p class="text-center text-sm text-base-content/60 mt-2">Vsak blok predstavlja 1% kapacitete</p>
+      </div>
+    </div>
+
+    <!-- Key Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <!-- Free Spots -->
+      <div class="stat bg-base-100 rounded-box shadow">
+        <div class="stat-figure text-success">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <div class="stat-title">Prosta mesta</div>
+        <div class="stat-value text-success">{formatNumber(allApplications.freeSpots)}</div>
+        <div class="stat-desc">od {formatNumber(allApplications.capacity)} skupaj</div>
+      </div>
+
+      <!-- Active Applications -->
+      <div class="stat bg-base-100 rounded-box shadow">
+        <div class="stat-figure text-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <div class="stat-title">Aktivne prošnje</div>
+        <div class="stat-value text-warning">{formatNumber(allApplications.active)}</div>
+        <div class="stat-desc">{formatNumber(allApplications.registered)} vseh prijav</div>
+      </div>
+
+      <!-- Active Applicants -->
+      <div class="stat bg-base-100 rounded-box shadow">
+        <div class="stat-figure text-info">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <div class="stat-title">Aktivni prosilci</div>
+        <div class="stat-value text-info">{formatNumber(allApplicants.active)}</div>
+        <div class="stat-desc">{formatNumber(allApplicants.registered)} vseh prosilcev</div>
+      </div>
+    </div>
+
+    <!-- Critical Insight -->
+    <div class="card bg-base-100 shadow-xl mb-8 border-l-4 border-error">
+      <div class="card-body">
+        <h2 class="card-title text-error">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Ključni podatek
+        </h2>
+        <div class="text-center py-4">
+          <p class="text-5xl font-bold text-error mb-2">{formatNumber(applicantsPerSpot)}</p>
+          <p class="text-lg">aktivnih prosilcev na vsako prosto mesto</p>
+        </div>
+        <p class="text-base-content/70 text-center">
+          Za {formatNumber(allApplications.freeSpots)} prostih mest trenutno čaka {formatNumber(allApplicants.active)} aktivnih prosilcev.
+        </p>
+      </div>
+    </div>
+
+    <!-- Additional Insights -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title text-sm">Povprečno št. aktivnih prošenj na dom</h3>
+          <p class="text-3xl font-bold">{formatNumber(avgApplicationsPerFacility)}</p>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+          <h3 class="card-title text-sm">Skupno število domov</h3>
+          <p class="text-3xl font-bold">{regions.reduce((acc, r) => acc + r.facilities.length, 0)}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Facilities with Free Spots -->
+    {facilitiesWithSpots.length > 0 && (
+      <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+          <h2 class="card-title text-success">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Domovi s prostimi mesti
+          </h2>
+          <div class="overflow-x-auto">
+            <table class="table table-zebra">
+              <thead>
+                <tr>
+                  <th>Dom</th>
+                  <th>Regija</th>
+                  <th class="text-right">Prosta mesta</th>
+                </tr>
+              </thead>
+              <tbody>
+                {facilitiesWithSpots.map(f => (
+                  <tr>
+                    <td>{f.name}</td>
+                    <td><span class="badge badge-ghost">{f.region}</span></td>
+                    <td class="text-right"><span class="badge badge-success">{f.freeSpots}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Regional Breakdown -->
+    <div class="card bg-base-100 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Pregled po regijah</h2>
+        <div class="space-y-2">
+          {regions.map(region => {
+            const regionOccupied = region.totals.totalApplications.capacity - region.totals.totalApplications.freeSpots;
+            const regionPercent = ((regionOccupied / region.totals.totalApplications.capacity) * 100).toFixed(1);
+            const hasSpots = region.totals.totalApplications.freeSpots > 0;
+
+            return (
+              <div class="collapse collapse-arrow bg-base-200">
+                <input type="radio" name="region-accordion" />
+                <div class="collapse-title font-medium flex items-center gap-4">
+                  <span class={`badge ${hasSpots ? 'badge-success' : 'badge-error'}`}>
+                    {region.totals.totalApplications.freeSpots} prostih
+                  </span>
+                  <span class="flex-1">{region.name}</span>
+                  <span class="text-sm text-base-content/60">{regionPercent}% zasedeno</span>
+                </div>
+                <div class="collapse-content">
+                  <div class="overflow-x-auto">
+                    <table class="table table-sm">
+                      <thead>
+                        <tr>
+                          <th>Tip</th>
+                          <th>Ime</th>
+                          <th class="text-right">Kapaciteta</th>
+                          <th class="text-right">Prosto</th>
+                          <th class="text-right">Aktivne prošnje</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {region.facilities.map(f => (
+                          <tr>
+                            <td><span class="badge badge-outline badge-sm">{f.type}</span></td>
+                            <td class="max-w-xs truncate">{f.name}</td>
+                            <td class="text-right">{f.capacity}</td>
+                            <td class="text-right">
+                              <span class={`badge badge-sm ${f.freeSpots && f.freeSpots > 0 ? 'badge-success' : 'badge-error'}`}>
+                                {f.freeSpots ?? '-'}
+                              </span>
+                            </td>
+                            <td class="text-right">{typeof f.activeApplications === 'number' ? formatNumber(f.activeApplications) : '-'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-base-content/50 text-sm py-8">
+      <p>Podatki se samodejno posodabljajo dnevno.</p>
+      <p class="mt-1">
+        Vir: <a href={data._metadata.source} class="link link-hover" target="_blank" rel="noopener">{data._metadata.source}</a>
+      </p>
+      <p class="mt-1 text-xs">
+        Zadnja posodobitev: {new Date(data._metadata.extractedAt).toLocaleString('sl-SI')}
+      </p>
+    </footer>
+  </div>
 </Layout>
