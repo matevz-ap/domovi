@@ -4,7 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: 'https://domovi.mapsoft.net',
-  base: '/domovi',
   vite: {
     plugins: [tailwindcss()],
   },
