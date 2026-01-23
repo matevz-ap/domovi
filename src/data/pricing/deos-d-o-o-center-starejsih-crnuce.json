@@ -1,0 +1,54 @@
+{
+  "name": "Center starejših črnuče",
+  "company": "Deos",
+  "address": {
+    "street": "Cesta Ceneta Štuparja",
+    "number": "141",
+    "post_code": "1231",
+    "city": "Ljubljana - Črnuče"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo kopalnice",
+      "daily_rate": 25.71,
+      "monthly_rate": 781.94
+    },
+    {
+      "room_type": "Dvoposteljna soba s kopalnico in dodatno opremo",
+      "daily_rate": 29.56,
+      "monthly_rate": 899.23
+    },
+    {
+      "room_type": "Dvoposteljna soba nadstandardne velikosti s kopalnico, balkonom in dodatno opremo",
+      "daily_rate": 32.13,
+      "monthly_rate": 977.43
+    },
+    {
+      "room_type": "Enoposteljna soba s kopalnico in dodatno opremo",
+      "daily_rate": 32.13,
+      "monthly_rate": 977.42
+    },
+    {
+      "room_type": "Enoposteljna soba s kopalnico, balkonom in dodatno opremo",
+      "daily_rate": 33.42,
+      "monthly_rate": 1016.52
+    },
+    {
+      "room_type": "Enoposteljna soba nadstandardne velikosti s kopalnico, balkonom in dodatno opremo",
+      "daily_rate": 34.71,
+      "monthly_rate": 1055.62
+    },
+    {
+      "room_type": "Dvoposteljni apartma s kopalnico, balkonom in dodatno opremo",
+      "daily_rate": 37.28,
+      "monthly_rate": 1133.82
+    }
+  ],
+  "absence_deduction_daily": 3.5,
+  "_metadata": {
+    "source": "https://www.deos.si/wp-content/uploads/2025/12/07-CR-CENIK-DO-1.12.2025.pdf",
+    "extractedAt": "2026-01-23T22:55:29.542Z",
+    "script": "extract-pricing-data.js"
+  }
+}

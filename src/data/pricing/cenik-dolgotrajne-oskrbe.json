@@ -1,0 +1,58 @@
+{
+  "name": "Center lucija",
+  "address": {
+    "street": "Unknown",
+    "number": "Unknown",
+    "post_code": "Unknown",
+    "city": "Lucija"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo sanitarij",
+      "daily_rate": 25.71,
+      "monthly_rate": 782.02
+    },
+    {
+      "room_type": "Enoposteljna soba s souporabo sanitarij",
+      "daily_rate": 28.28,
+      "monthly_rate": 860.19
+    },
+    {
+      "room_type": "Enoposteljna soba s kopalnico",
+      "daily_rate": 30.85,
+      "monthly_rate": 938.36
+    },
+    {
+      "room_type": "Dvoposteljna soba s kopalnico",
+      "daily_rate": 26.99,
+      "monthly_rate": 820.95
+    },
+    {
+      "room_type": "Apartma/garsonjera s kuhinjskim kotom",
+      "daily_rate": 33.42,
+      "monthly_rate": 1016.54
+    },
+    {
+      "room_type": "Enoposteljna soba s kuhinjskim kotom in kopalnico",
+      "daily_rate": 35.99,
+      "monthly_rate": 1094.71
+    },
+    {
+      "room_type": "Dvoposteljna soba s kuhinjskim kotom in kopalnico",
+      "daily_rate": 30.85,
+      "monthly_rate": 938.36
+    },
+    {
+      "room_type": "Triposteljna soba",
+      "daily_rate": 25.28,
+      "monthly_rate": 768.94
+    }
+  ],
+  "absence_deduction_daily": 3.5,
+  "_metadata": {
+    "source": "https://center-lucija.si/wp-content/uploads/2026/01/cenik-dolgotrajne-oskrbe-zadnji.pdf",
+    "extractedAt": "2026-01-23T22:55:35.626Z",
+    "script": "extract-pricing-data.js"
+  }
+}

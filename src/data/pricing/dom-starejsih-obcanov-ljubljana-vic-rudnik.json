@@ -1,0 +1,48 @@
+{
+  "name": "Dom starejših občanov Ljubljana Vič-Rudnik",
+  "address": {
+    "street": "Cesta v Gorice",
+    "number": "35",
+    "post_code": "1000",
+    "city": "Ljubljana"
+  },
+  "effective_date": "2024-03-01",
+  "room_pricing": [
+    {
+      "room_type": "Enoposteljna soba s kopalnico (Oskrba I)",
+      "daily_rate": 28.45,
+      "monthly_rate": 865.36
+    },
+    {
+      "room_type": "Enoposteljna soba brez kopalnice (Oskrba I)",
+      "daily_rate": 26.17,
+      "monthly_rate": 796.01
+    },
+    {
+      "room_type": "Dvoposteljna soba s kopalnico (Oskrba I)",
+      "daily_rate": 23.33,
+      "monthly_rate": 709.63
+    },
+    {
+      "room_type": "Dvoposteljna soba brez kopalnice (Oskrba I)",
+      "daily_rate": 21.62,
+      "monthly_rate": 657.62
+    },
+    {
+      "room_type": "Enoposteljna soba s kopalnico (Oskrba IV)",
+      "daily_rate": 41.25,
+      "monthly_rate": 1254.7
+    },
+    {
+      "room_type": "Dvoposteljna soba s kopalnico (Oskrba IV)",
+      "daily_rate": 36.13,
+      "monthly_rate": 1098.96
+    }
+  ],
+  "absence_deduction_daily": 5.2,
+  "_metadata": {
+    "source": "https://www.dom-starejsih-sentjur.si/wp-content/uploads/2024/04/Cenik-socialno-varstvenih-storitev.pdf?v=20251201",
+    "extractedAt": "2026-01-23T22:55:40.189Z",
+    "script": "extract-pricing-data.js"
+  }
+}

@@ -42,7 +42,7 @@
   "absence_deduction_daily": 4.5,
   "_metadata": {
     "source": "https://www.dom-hrastnik.si/wp-content/uploads/2022/12/cenik-do-1-12-2025.pdf",
-    "extractedAt": "2026-01-23T22:44:02.821Z",
+    "extractedAt": "2026-01-23T22:55:24.239Z",
     "script": "extract-pricing-data.js"
   }
 }
