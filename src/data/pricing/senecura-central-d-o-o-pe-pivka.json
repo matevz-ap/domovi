@@ -1,0 +1,38 @@
+{
+  "name": "SeneCura Central d.o.o. PE Pivka",
+  "address": {
+    "street": "Pivka",
+    "number": "n/a",
+    "post_code": "6257",
+    "city": "Pivka"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Standardna namestitev (dvoposteljna soba brez lastne kopalnice)",
+      "daily_rate": 25.71,
+      "monthly_rate": 782.02
+    },
+    {
+      "room_type": "Enoposteljna soba brez lastne kopalnice",
+      "daily_rate": 28.28,
+      "monthly_rate": 860.19
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastno kopalnico",
+      "daily_rate": 28.28,
+      "monthly_rate": 860.19
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico",
+      "daily_rate": 30.85,
+      "monthly_rate": 938.36
+    }
+  ],
+  "absence_deduction_daily": 3.41,
+  "_metadata": {
+    "source": "https://pivka.senecura.si/wp-content/uploads/sites/272/2025/12/Cenik-DO-Pivka.pdf",
+    "extractedAt": "2026-01-23T23:23:32.561Z",
+    "script": "extract-pricing-data.js"
+  }
+}

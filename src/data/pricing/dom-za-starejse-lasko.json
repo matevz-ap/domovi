@@ -1,0 +1,68 @@
+{
+  "name": "Dom za starejše Laško",
+  "address": {
+    "street": "",
+    "number": "",
+    "post_code": "3270",
+    "city": "Laško"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Petposteljna soba z lastnimi sanitarijami in dodatno opremo (Oaza)",
+      "daily_rate": 22.66,
+      "monthly_rate": 689.05
+    },
+    {
+      "room_type": "Triposteljna soba s souporabo kopalnice in dodatno opremo",
+      "daily_rate": 24.07,
+      "monthly_rate": 731.94
+    },
+    {
+      "room_type": "Triposteljna soba s souporabo kopalnice in dodatno opremo ter nadstandardno velikostjo",
+      "daily_rate": 24.49,
+      "monthly_rate": 744.71
+    },
+    {
+      "room_type": "Dvoposteljna soba s souporabo kopalnice in brez dodatne opreme – STANDARD",
+      "daily_rate": 24.90,
+      "monthly_rate": 757.18
+    },
+    {
+      "room_type": "Dvoposteljna soba s souporabo kopalnice in dodatno opremo",
+      "daily_rate": 25.52,
+      "monthly_rate": 776.05
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastno kopalnico in dodatno opremo",
+      "daily_rate": 26.77,
+      "monthly_rate": 814.06
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastno kopalnico in dodatno opremo ter nadstandardno velikostjo",
+      "daily_rate": 27.39,
+      "monthly_rate": 832.92
+    },
+    {
+      "room_type": "Enoposteljna soba s souporabo kopalnice in dodatno opremo",
+      "daily_rate": 28.64,
+      "monthly_rate": 871.14
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico in dodatno opremo",
+      "daily_rate": 31.13,
+      "monthly_rate": 946.88
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico in dodatno opremo ter nadstandardno velikostjo",
+      "daily_rate": 32.38,
+      "monthly_rate": 984.90
+    }
+  ],
+  "absence_deduction_daily": 0,
+  "_metadata": {
+    "source": "manual",
+    "extractedAt": "2026-01-24T00:00:00.000Z",
+    "script": "manual"
+  }
+}

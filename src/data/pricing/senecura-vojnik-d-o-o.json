@@ -1,0 +1,53 @@
+{
+  "name": "Senecura Vojnik d.o.o.",
+  "address": {
+    "street": "Vojnik",
+    "number": "1",
+    "post_code": "3212",
+    "city": "Vojnik"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo sanitarij (Standard)",
+      "daily_rate": 25.71,
+      "monthly_rate": 782.02
+    },
+    {
+      "room_type": "Enoposteljna soba s souporabo sanitarij",
+      "daily_rate": 28.28,
+      "monthly_rate": 860.19
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico",
+      "daily_rate": 30.85,
+      "monthly_rate": 938.36
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastno kopalnico",
+      "daily_rate": 28.28,
+      "monthly_rate": 860.19
+    },
+    {
+      "room_type": "Troposteljna soba",
+      "daily_rate": 24.42,
+      "monthly_rate": 742.78
+    },
+    {
+      "room_type": "Soba z balkonom (dodatek na standard)",
+      "daily_rate": 27,
+      "monthly_rate": 821.26
+    },
+    {
+      "room_type": "Večja soba (nad 20% standarda)",
+      "daily_rate": 27,
+      "monthly_rate": 821.26
+    }
+  ],
+  "absence_deduction_daily": 3.41,
+  "_metadata": {
+    "source": "https://vojnik.senecura.si/wp-content/uploads/sites/267/2025/12/Cenik-DO-01122025.pdf",
+    "extractedAt": "2026-01-23T23:22:53.816Z",
+    "script": "extract-pricing-data.js"
+  }
+}

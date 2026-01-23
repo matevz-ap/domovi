@@ -1,0 +1,63 @@
+{
+  "name": "OB - 345 - 1.0",
+  "address": {
+    "street": "Neznano",
+    "number": "Neznano",
+    "post_code": "Neznano",
+    "city": "Neznano"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo sanitarij",
+      "daily_rate": 25.71,
+      "monthly_rate": 782.02
+    },
+    {
+      "room_type": "Enoposteljna soba s souporabo sanitarij",
+      "daily_rate": 28.28,
+      "monthly_rate": 860.19
+    },
+    {
+      "room_type": "Enoposteljna soba s kopalnico",
+      "daily_rate": 30.85,
+      "monthly_rate": 938.36
+    },
+    {
+      "room_type": "Dvoposteljna soba s kopalnico",
+      "daily_rate": 26.99,
+      "monthly_rate": 820.96
+    },
+    {
+      "room_type": "Apartma/garsonjera s kuhinjskim kotom",
+      "daily_rate": 33.42,
+      "monthly_rate": 1016.54
+    },
+    {
+      "room_type": "Enoposteljna soba s kuhinjskim kotom in kopalnico",
+      "daily_rate": 35.99,
+      "monthly_rate": 1094.71
+    },
+    {
+      "room_type": "Dvoposteljna soba s kuhinjskim kotom in kopalnico",
+      "daily_rate": 30.85,
+      "monthly_rate": 938.36
+    },
+    {
+      "room_type": "Enoposteljna soba/garsonjera z balkonom",
+      "daily_rate": 29.57,
+      "monthly_rate": 899.43
+    },
+    {
+      "room_type": "Triposteljna soba",
+      "daily_rate": 25.28,
+      "monthly_rate": 768.94
+    }
+  ],
+  "absence_deduction_daily": 3.5,
+  "_metadata": {
+    "source": "https://center-lucija.si/wp-content/uploads/2026/01/cenik-dolgotrajne-oskrbe-zadnji.pdf",
+    "extractedAt": "2026-01-23T23:22:14.962Z",
+    "script": "extract-pricing-data.js"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Dom upokojencev Ptuj",
+  "address": {
+    "street": "Volkmerjeva cesta",
+    "number": "10",
+    "post_code": "2250",
+    "city": "Ptuj"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo sanitarij (Standard)",
+      "daily_rate": 23.12,
+      "monthly_rate": 703.24
+    },
+    {
+      "room_type": "Enoposteljna soba (Standard + 10% pribitek)",
+      "daily_rate": 25.43,
+      "monthly_rate": 773.5
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico",
+      "daily_rate": 26.59,
+      "monthly_rate": 808.79
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico in balkonom",
+      "daily_rate": 27.28,
+      "monthly_rate": 829.78
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastno kopalnico",
+      "daily_rate": 23.7,
+      "monthly_rate": 720.88
+    },
+    {
+      "room_type": "Dvoposteljna soba z balkonom",
+      "daily_rate": 23.47,
+      "monthly_rate": 713.89
+    },
+    {
+      "room_type": "Triposteljna soba",
+      "daily_rate": 21.96,
+      "monthly_rate": 667.96
+    },
+    {
+      "room_type": "Večposteljna soba",
+      "daily_rate": 20.81,
+      "monthly_rate": 632.98
+    },
+    {
+      "room_type": "Apartma",
+      "daily_rate": 30.06,
+      "monthly_rate": 914.34
+    }
+  ],
+  "absence_deduction_daily": 3.54,
+  "_metadata": {
+    "source": "https://www.dom-upokojencev.si/wp-content/uploads/2025/12/Cenik-nastanitve-in-prehrane-dolgotrajne-oskrbe-vse-enote-1.-12.-2025.pdf",
+    "extractedAt": "2026-01-23T23:23:37.778Z",
+    "script": "extract-pricing-data.js"
+  }
+}

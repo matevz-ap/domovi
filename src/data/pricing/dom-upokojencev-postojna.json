@@ -1,0 +1,48 @@
+{
+  "name": "Dom upokojencev Postojna",
+  "address": {
+    "street": "Rožna ulica",
+    "number": "10",
+    "post_code": "6230",
+    "city": "Postojna"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Standardna dvoposteljna soba (osnovna cena)",
+      "daily_rate": 23.05,
+      "monthly_rate": 701.11
+    },
+    {
+      "room_type": "Enoposteljna soba",
+      "daily_rate": 25.36,
+      "monthly_rate": 771.38
+    },
+    {
+      "room_type": "Troposteljna soba",
+      "daily_rate": 21.9,
+      "monthly_rate": 666.13
+    },
+    {
+      "room_type": "Štiriposteljna soba",
+      "daily_rate": 20.75,
+      "monthly_rate": 631.15
+    },
+    {
+      "room_type": "Pet in več posteljna soba",
+      "daily_rate": 19.59,
+      "monthly_rate": 595.87
+    },
+    {
+      "room_type": "Apartma/garsonjera s kuhinjo",
+      "daily_rate": 29.97,
+      "monthly_rate": 911.6
+    }
+  ],
+  "absence_deduction_daily": 0,
+  "_metadata": {
+    "source": "https://du-po.si/wp-content/uploads/2025/12/Cenik-do.pdf",
+    "extractedAt": "2026-01-23T23:23:22.505Z",
+    "script": "extract-pricing-data.js"
+  }
+}

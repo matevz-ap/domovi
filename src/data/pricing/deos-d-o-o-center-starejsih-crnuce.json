@@ -1,6 +1,5 @@
 {
-  "name": "Center starejših črnuče",
-  "company": "Deos",
+  "name": "DEOS d.o.o., CENTER STAREJŠIH ČRNUČE",
   "address": {
     "street": "Cesta Ceneta Štuparja",
     "number": "141",
@@ -48,7 +47,7 @@
   "absence_deduction_daily": 3.5,
   "_metadata": {
     "source": "https://www.deos.si/wp-content/uploads/2025/12/07-CR-CENIK-DO-1.12.2025.pdf",
-    "extractedAt": "2026-01-23T22:55:29.542Z",
+    "extractedAt": "2026-01-23T23:22:10.946Z",
     "script": "extract-pricing-data.js"
   }
 }

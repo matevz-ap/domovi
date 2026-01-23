@@ -1,0 +1,63 @@
+{
+  "name": "DOM STAREJŠIH OBČANOV ILIRSKA BISTRICA",
+  "address": {
+    "street": "KIDRIČEVA ULICA",
+    "number": "15",
+    "post_code": "6250",
+    "city": "ILIRSKA BISTRICA"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo sanitarij",
+      "daily_rate": 21.44,
+      "monthly_rate": 652.14
+    },
+    {
+      "room_type": "Enoposteljna soba s souporabo sanitarij",
+      "daily_rate": 25.78,
+      "monthly_rate": 784.15
+    },
+    {
+      "room_type": "Enoposteljna soba (nadstandard)",
+      "daily_rate": 23.58,
+      "monthly_rate": 717.23
+    },
+    {
+      "room_type": "Dvoposteljna garsoniera I. prizidek",
+      "daily_rate": 24.96,
+      "monthly_rate": 759.21
+    },
+    {
+      "room_type": "Enoposteljna garsoniera I. prizidek",
+      "daily_rate": 28.47,
+      "monthly_rate": 865.97
+    },
+    {
+      "room_type": "Enoposteljna garsoniera II. prizidek",
+      "daily_rate": 27.89,
+      "monthly_rate": 848.33
+    },
+    {
+      "room_type": "Dvoposteljna pregrajena soba (podstandard)",
+      "daily_rate": 20.74,
+      "monthly_rate": 630.85
+    },
+    {
+      "room_type": "Triposteljna soba (podstandard)",
+      "daily_rate": 20.27,
+      "monthly_rate": 616.55
+    },
+    {
+      "room_type": "Štiriposteljna soba (podstandard)",
+      "daily_rate": 19.1,
+      "monthly_rate": 580.96
+    }
+  ],
+  "absence_deduction_daily": 0,
+  "_metadata": {
+    "source": "https://www.dso-ilb.si/wp-content/uploads/2025/12/CenikDO2025.pdf",
+    "extractedAt": "2026-01-23T23:23:11.801Z",
+    "script": "extract-pricing-data.js"
+  }
+}

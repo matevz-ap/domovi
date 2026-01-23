@@ -1,0 +1,63 @@
+{
+  "name": "Dom upokojencev Šmarje pri Jelšah",
+  "address": {
+    "street": "Šmarje pri Jelšah",
+    "number": "1",
+    "post_code": "3240",
+    "city": "Šmarje pri Jelšah"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Dvoposteljna soba s souporabo sanitarij",
+      "daily_rate": 25.64,
+      "monthly_rate": 779.89
+    },
+    {
+      "room_type": "Enoposteljna soba s souporabo sanitarij",
+      "daily_rate": 28.2,
+      "monthly_rate": 857.76
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico",
+      "daily_rate": 30.76,
+      "monthly_rate": 935.63
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastno kopalnico",
+      "daily_rate": 26.92,
+      "monthly_rate": 818.83
+    },
+    {
+      "room_type": "Enoposteljna soba z lastnimi sanitarijami",
+      "daily_rate": 29.48,
+      "monthly_rate": 896.69
+    },
+    {
+      "room_type": "Dvoposteljna soba z lastnimi sanitarijami",
+      "daily_rate": 26.28,
+      "monthly_rate": 799.46
+    },
+    {
+      "room_type": "Garsonjera",
+      "daily_rate": 33.33,
+      "monthly_rate": 1013.8
+    },
+    {
+      "room_type": "Triposteljna soba",
+      "daily_rate": 24.36,
+      "monthly_rate": 740.96
+    },
+    {
+      "room_type": "Štiriposteljna ali več posteljna soba",
+      "daily_rate": 23.08,
+      "monthly_rate": 702.02
+    }
+  ],
+  "absence_deduction_daily": 4.27,
+  "_metadata": {
+    "source": "http://www.dusmarje.si/Files/pdf/53536.pdf",
+    "extractedAt": "2026-01-23T23:22:42.771Z",
+    "script": "extract-pricing-data.js"
+  }
+}

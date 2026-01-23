@@ -41,8 +41,8 @@
   ],
   "absence_deduction_daily": 5.2,
   "_metadata": {
-    "source": "https://www.dom-starejsih-sentjur.si/wp-content/uploads/2024/04/Cenik-socialno-varstvenih-storitev.pdf?v=20251201",
-    "extractedAt": "2026-01-23T22:55:40.189Z",
+    "source": "https://talitakum.si/wp-content/uploads/2025/12/cenik-DO.pdf",
+    "extractedAt": "2026-01-23T23:23:28.153Z",
     "script": "extract-pricing-data.js"
   }
 }
