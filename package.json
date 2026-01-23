@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "extract-data": "node scripts/extract-pdf-data.js"
+    "extract-data": "node scripts/extract-pdf-data.js",
+    "extract-pricing": "node scripts/extract-pricing-data.js"
   },
   "dependencies": {
     "@openrouter/sdk": "^0.4.0",

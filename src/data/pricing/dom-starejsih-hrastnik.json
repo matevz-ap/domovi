@@ -1,0 +1,48 @@
+{
+  "name": "DOM STAREJŠIH HRASTNIK",
+  "address": {
+    "street": "NOVI LOG",
+    "number": "4/A",
+    "post_code": "1430",
+    "city": "HRASTNIK"
+  },
+  "effective_date": "2025-12-01",
+  "room_pricing": [
+    {
+      "room_type": "Standardna dvoposteljna soba",
+      "daily_rate": 24.62,
+      "monthly_rate": 748.87
+    },
+    {
+      "room_type": "Enoposteljna soba",
+      "daily_rate": 27.08,
+      "monthly_rate": 823.69
+    },
+    {
+      "room_type": "Enoposteljna soba z lastnimi sanitarijami",
+      "daily_rate": 28.4,
+      "monthly_rate": 863.84
+    },
+    {
+      "room_type": "Enoposteljna soba z lastno kopalnico",
+      "daily_rate": 29.54,
+      "monthly_rate": 898.52
+    },
+    {
+      "room_type": "Triposteljna soba (podstandard)",
+      "daily_rate": 23.39,
+      "monthly_rate": 711.45
+    },
+    {
+      "room_type": "Štiriposteljna ali večposteljna soba (podstandard)",
+      "daily_rate": 22.16,
+      "monthly_rate": 674.04
+    }
+  ],
+  "absence_deduction_daily": 4.5,
+  "_metadata": {
+    "source": "https://www.dom-hrastnik.si/wp-content/uploads/2022/12/cenik-do-1-12-2025.pdf",
+    "extractedAt": "2026-01-23T22:44:02.821Z",
+    "script": "extract-pricing-data.js"
+  }
+}
