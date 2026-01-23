@@ -1,0 +1,40 @@
+name: Extract Pricing Data
+
+on:
+  workflow_dispatch: # Manual trigger only
+
+jobs:
+  extract-pricing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run pricing extraction script
+        env:
+          OPEN_ROUTER: ${{ secrets.OPEN_ROUTER }}
+          MODEL: ${{ vars.MODEL }}
+        run: node scripts/extract-pricing-data.js
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add src/data/pricing/*.json
+          git diff --cached --exit-code || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update pricing data"
+          git push
