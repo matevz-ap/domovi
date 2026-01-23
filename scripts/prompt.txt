@@ -1,0 +1,39 @@
+Extract ALL data from this PDF document. This is a report about nursing homes (domovi za starejše) in Slovenia.
+
+IMPORTANT: The PDF contains MULTIPLE PAGES with data for ALL regions in Slovenia. You MUST extract data from EVERY page and EVERY region. Typical regions include: CELJE, KOPER, KRANJ, LJUBLJANA, MARIBOR, MURSKA SOBOTA, NOVA GORICA, NOVO MESTO, etc.
+
+Return ONLY valid JSON with this exact structure:
+{
+  "extractedAt": "<current ISO timestamp>",
+  "data": {
+    "title": "<document title>",
+    "reportDate": "<date from document>",
+    "legend": { "J": "...", "Z": "...", "P": "..." },
+    "regions": [
+      {
+        "name": "<REGION NAME>",
+        "facilities": [
+          {
+            "id": <number>,
+            "type": "<J/Z/P>",
+            "name": "<facility name>",
+            "capacity": <number>,
+            "freeSpots": <number or null>,
+            "registeredApplications": <number or "NI PODATKA">,
+            "activeApplications": <number or null>
+          }
+        ],
+        "totals": {
+          "totalApplications": { "capacity": <num>, "freeSpots": <num>, "registered": <num>, "active": <num> },
+          "totalApplicants": { "registered": <num>, "active": <num> }
+        }
+      }
+    ],
+    "grandTotals": {
+      "allApplications": { "capacity": <num>, "freeSpots": <num>, "registered": <num>, "active": <num> },
+      "allApplicants": { "registered": <num>, "active": <num> }
+    }
+  }
+}
+
+Extract EVERY region and EVERY facility. Do not skip any pages or data.
