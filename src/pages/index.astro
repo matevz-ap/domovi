@@ -60,41 +60,27 @@ const facilitiesWithSpots = regions.flatMap((r) =>
           Zasedenost kapacitet
         </h2>
 
-        <div class="flex justify-between text-sm mb-2">
-          <span>Zasedeno: {formatNumber(occupied)}</span>
-          <span class="font-bold text-3xl text-error">{occupancyPercent}%</span>
-          <span>Kapaciteta: {formatNumber(allApplications.capacity)}</span>
-        </div>
-
-        <!-- Custom capacity bar -->
-        <div
-          class="w-full h-8 bg-base-300 rounded-full overflow-hidden relative"
-        >
-          <div
-            class="h-full bg-gradient-to-r from-success via-warning to-error transition-all duration-1000"
-            style={`width: ${occupancyPercent}%`}
-          >
-          </div>
-          <div class="absolute inset-0 flex items-center justify-end pr-2">
-            <span class="badge badge-success badge-sm"
-              >{formatNumber(allApplications.freeSpots)} prostih</span
-            >
-          </div>
+        <div class="text-center mb-4">
+          <span class="font-bold text-5xl text-error">{occupancyPercent}%</span>
+          <p class="text-base-content/60 mt-1">zasedenost</p>
         </div>
 
         <!-- Visual blocks representation -->
-        <div class="mt-4 flex flex-wrap gap-0.5">
+        <div class="flex gap-1">
           {
             Array.from({ length: 100 }).map((_, i) => (
               <div
-                class={`w-2 h-4 rounded-sm ${i < Math.round(Number(occupancyPercent)) ? "bg-error" : "bg-success"}`}
+                class={`flex-1 h-8 rounded-sm ${i < Math.round(Number(occupancyPercent)) ? "bg-error" : "bg-success"}`}
               />
             ))
           }
         </div>
-        <p class="text-center text-sm text-base-content/60 mt-2">
-          Vsak blok predstavlja 1% kapacitete
-        </p>
+
+        <div class="flex justify-between text-sm mt-4 text-base-content/70">
+          <span>Zasedeno: {formatNumber(occupied)}</span>
+          <span>Prosto: {formatNumber(allApplications.freeSpots)}</span>
+          <span>Kapaciteta: {formatNumber(allApplications.capacity)}</span>
+        </div>
       </div>
     </div>
 
