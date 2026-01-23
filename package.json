@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "extract-data": "node scripts/extract-pdf-data.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
