@@ -86,8 +86,18 @@ const formatCurrency = (num: number) =>
           <span class="font-bold text-5xl text-error">{occupancyPercent}%</span>
         </div>
 
-        <!-- Visual blocks representation -->
-        <div class="flex gap-1">
+        <!-- Visual blocks representation - Mobile (20 bars) -->
+        <div class="flex gap-1 md:hidden">
+          {
+            Array.from({ length: 20 }).map((_, i) => (
+              <div
+                class={`flex-1 h-8 rounded ${i < Math.round(Number(occupancyPercent) / 5) ? "bg-error" : "bg-success"}`}
+              />
+            ))
+          }
+        </div>
+        <!-- Visual blocks representation - Desktop (100 bars) -->
+        <div class="hidden md:flex gap-1">
           {
             Array.from({ length: 100 }).map((_, i) => (
               <div
