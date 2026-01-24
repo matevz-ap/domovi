@@ -1,0 +1,100 @@
+---
+// Load chart data
+import chartDataRaw from "../data/chart.json";
+const chartData = chartDataRaw as {
+    date: string;
+    freeSpots: number;
+    activeApplications: number;
+}[];
+---
+
+<div class="card bg-base-100 shadow-xl mb-8">
+    <div class="card-body">
+        <h2 class="card-title mb-4">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                ></path>
+            </svg>
+            Trend skozi čas
+        </h2>
+        <canvas id="trendChart" class="w-full h-64"></canvas>
+    </div>
+</div>
+
+<script
+    id="chart-data"
+    type="application/json"
+    set:html={JSON.stringify(chartData)}
+/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js" is:inline></script>
+<script is:inline>
+    const configElement = document.getElementById("chart-data");
+    const data = JSON.parse(configElement.textContent);
+
+    if (data.length >= 1) {
+        const ctx = document.getElementById("trendChart");
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: data.map((d) => d.date),
+                datasets: [
+                    {
+                        label: "Prosta mesta",
+                        data: data.map((d) => d.freeSpots),
+                        borderColor: "#36d399",
+                        backgroundColor: "rgba(54, 211, 153, 0.1)",
+                        yAxisID: "y",
+                        tension: 0.3,
+                    },
+                    {
+                        label: "Aktivne prošnje",
+                        data: data.map((d) => d.activeApplications),
+                        borderColor: "#fbbd23",
+                        backgroundColor: "rgba(251, 189, 35, 0.1)",
+                        yAxisID: "y1",
+                        tension: 0.3,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: "index",
+                    intersect: false,
+                },
+                scales: {
+                    y: {
+                        type: "linear",
+                        display: true,
+                        position: "left",
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                        },
+                    },
+                    y1: {
+                        type: "linear",
+                        display: true,
+                        position: "right",
+                        ticks: {
+                            precision: 0,
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                },
+            },
+        });
+    }
+</script>

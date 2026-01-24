@@ -88,6 +88,34 @@ async function main() {
     const outputPath = path.join(__dirname, "..", "src", "data", `${today}.json`);
     fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
     console.log("Data saved to:", outputPath);
+
+    // Update chart data
+    const chartPath = path.join(__dirname, "..", "src", "data", "chart.json");
+    let chartData = [];
+    if (fs.existsSync(chartPath)) {
+      chartData = JSON.parse(fs.readFileSync(chartPath, "utf-8"));
+    }
+
+    // Check if today's data already exists
+    const existingIndex = chartData.findIndex((d) => d.date === today);
+    const chartEntry = {
+      date: today,
+      freeSpots: extractedData.data.grandTotals.allApplications.freeSpots,
+      activeApplications: extractedData.data.grandTotals.allApplications.active,
+    };
+
+    if (existingIndex >= 0) {
+      chartData[existingIndex] = chartEntry;
+    } else {
+      chartData.push(chartEntry);
+    }
+
+    // Keep sorted by date
+    chartData.sort((a, b) => a.date.localeCompare(b.date));
+
+    fs.writeFileSync(chartPath, JSON.stringify(chartData, null, 2));
+    console.log("Chart data updated:", chartPath);
+
     console.log("Extraction complete!");
   } catch (error) {
     console.error("Error:", error.message);
