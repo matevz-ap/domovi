@@ -11,7 +11,6 @@
     "extract-pricing": "node scripts/extract-pricing-data.js"
   },
   "dependencies": {
-    "@openrouter/sdk": "^0.4.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.15",
     "daisyui": "^5.5.14",
