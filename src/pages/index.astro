@@ -100,7 +100,6 @@ const formatCurrency = (num: number) =>
 
         <div class="flex justify-between text-sm mt-4 text-base-content/70">
           <span>Zasedeno: {formatNumber(occupied)}</span>
-          <span>Prosto: {formatNumber(allApplications.freeSpots)}</span>
           <span>Kapaciteta: {formatNumber(allApplications.capacity)}</span>
         </div>
       </div>
@@ -317,7 +316,7 @@ const formatCurrency = (num: number) =>
                     <span
                       class={`badge ${hasSpots ? "badge-success" : "badge-error"}`}
                     >
-                      {region.totals.totalApplications.freeSpots} prostih
+                      {region.totals.totalApplications.freeSpots}
                     </span>
                     <span class="flex-1">{region.name}</span>
                     <span class="text-sm text-base-content/60">
