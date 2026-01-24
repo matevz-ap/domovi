@@ -84,7 +84,6 @@ const formatCurrency = (num: number) =>
 
         <div class="text-center mb-4">
           <span class="font-bold text-5xl text-error">{occupancyPercent}%</span>
-          <p class="text-base-content/60 mt-1">zasedenost</p>
         </div>
 
         <!-- Visual blocks representation -->
@@ -221,12 +220,10 @@ const formatCurrency = (num: number) =>
     </div>
 
     <!-- Additional Insights -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    <div class="grid grid-cols-2 gap-4 mb-8">
       <div class="card bg-base-100 shadow">
         <div class="card-body">
-          <h3 class="card-title text-sm">
-            Povprečno št. aktivnih prošenj na dom
-          </h3>
+          <h3 class="card-title text-sm">Prošenj na dom</h3>
           <p class="text-3xl font-bold">
             {formatNumber(avgApplicationsPerFacility)}
           </p>
@@ -234,7 +231,7 @@ const formatCurrency = (num: number) =>
       </div>
       <div class="card bg-base-100 shadow">
         <div class="card-body">
-          <h3 class="card-title text-sm">Skupno število domov</h3>
+          <h3 class="card-title text-sm">Število domov</h3>
           <p class="text-3xl font-bold">
             {regions.reduce((acc, r) => acc + r.facilities.length, 0)}
           </p>
@@ -270,7 +267,7 @@ const formatCurrency = (num: number) =>
                   <tr>
                     <th>Dom</th>
                     <th>Regija</th>
-                    <th class="text-right">Prosta mesta</th>
+                    <th class="text-right">Mesta</th>
                   </tr>
                 </thead>
                 <tbody>
