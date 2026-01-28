@@ -161,14 +161,19 @@ const formatCurrency = (num: number) =>
         </div>
         <div class="stat-desc">
           od {formatNumber(allApplications.capacity)} skupaj
-          {freeSpotsChange !== null && freeSpotsChange !== 0 && (
-            <span class={freeSpotsChange > 0 ? "text-success" : "text-error"}>
-              {" "}({formatChange(freeSpotsChange)})
-            </span>
-          )}
-          {freeSpotsChange === 0 && (
-            <span class="text-base-content/50"> (brez sprememb)</span>
-          )}
+          {
+            freeSpotsChange !== null && freeSpotsChange !== 0 && (
+              <span class={freeSpotsChange > 0 ? "text-success" : "text-error"}>
+                {" "}
+                ({formatChange(freeSpotsChange)})
+              </span>
+            )
+          }
+          {
+            freeSpotsChange === 0 && (
+              <span class="text-base-content/50"> (brez sprememb)</span>
+            )
+          }
         </div>
       </div>
 
@@ -196,14 +201,24 @@ const formatCurrency = (num: number) =>
         </div>
         <div class="stat-desc">
           {formatNumber(allApplications.registered)} vseh prijav
-          {activeApplicationsChange !== null && activeApplicationsChange !== 0 && (
-            <span class={activeApplicationsChange < 0 ? "text-success" : "text-error"}>
-              {" "}({formatChange(activeApplicationsChange)})
-            </span>
-          )}
-          {activeApplicationsChange === 0 && (
-            <span class="text-base-content/50"> (brez sprememb)</span>
-          )}
+          {
+            activeApplicationsChange !== null &&
+              activeApplicationsChange !== 0 && (
+                <span
+                  class={
+                    activeApplicationsChange < 0 ? "text-success" : "text-error"
+                  }
+                >
+                  {" "}
+                  ({formatChange(activeApplicationsChange)})
+                </span>
+              )
+          }
+          {
+            activeApplicationsChange === 0 && (
+              <span class="text-base-content/50"> (brez sprememb)</span>
+            )
+          }
         </div>
       </div>
 
@@ -231,14 +246,23 @@ const formatCurrency = (num: number) =>
         </div>
         <div class="stat-desc">
           {formatNumber(allApplicants.registered)} vseh prosilcev
-          {activeApplicantsChange !== null && activeApplicantsChange !== 0 && (
-            <span class={activeApplicantsChange < 0 ? "text-success" : "text-error"}>
-              {" "}({formatChange(activeApplicantsChange)})
-            </span>
-          )}
-          {activeApplicantsChange === 0 && (
-            <span class="text-base-content/50"> (brez sprememb)</span>
-          )}
+          {
+            activeApplicantsChange !== null && activeApplicantsChange !== 0 && (
+              <span
+                class={
+                  activeApplicantsChange < 0 ? "text-success" : "text-error"
+                }
+              >
+                {" "}
+                ({formatChange(activeApplicantsChange)})
+              </span>
+            )
+          }
+          {
+            activeApplicantsChange === 0 && (
+              <span class="text-base-content/50"> (brez sprememb)</span>
+            )
+          }
         </div>
       </div>
     </div>
@@ -370,7 +394,7 @@ const formatCurrency = (num: number) =>
               stroke-width="2"
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
           </svg>
-          Pregled po regijah
+          Zasedenost po regijah
         </h2>
         <div class="space-y-2">
           {
@@ -395,7 +419,7 @@ const formatCurrency = (num: number) =>
                     </span>
                     <span class="flex-1">{region.name}</span>
                     <span class="text-sm text-base-content/60">
-                      {regionPercent}% zasedeno
+                      {regionPercent}%
                     </span>
                   </div>
                   <div class="collapse-content">
