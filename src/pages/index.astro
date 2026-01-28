@@ -18,6 +18,27 @@ const data = latestModule as any;
 const { grandTotals, reportDate, regions } = data.data;
 const { allApplications, allApplicants } = grandTotals;
 
+// Calculate day-over-day changes
+let freeSpotsChange: number | null = null;
+let activeApplicationsChange: number | null = null;
+let activeApplicantsChange: number | null = null;
+
+if (sortedFiles.length >= 2) {
+  const prevData = (sortedFiles[1][1] as any).data;
+  const prevApplications = prevData.grandTotals.allApplications;
+  const prevApplicants = prevData.grandTotals.allApplicants;
+
+  freeSpotsChange = allApplications.freeSpots - prevApplications.freeSpots;
+  activeApplicationsChange = allApplications.active - prevApplications.active;
+  activeApplicantsChange = allApplicants.active - prevApplicants.active;
+}
+
+const formatChange = (change: number | null) => {
+  if (change === null) return null;
+  const sign = change > 0 ? "+" : "";
+  return `${sign}${change.toLocaleString("sl-SI")}`;
+};
+
 // Calculate key metrics
 const occupied = allApplications.capacity - allApplications.freeSpots;
 const occupancyPercent = ((occupied / allApplications.capacity) * 100).toFixed(
@@ -140,6 +161,14 @@ const formatCurrency = (num: number) =>
         </div>
         <div class="stat-desc">
           od {formatNumber(allApplications.capacity)} skupaj
+          {freeSpotsChange !== null && freeSpotsChange !== 0 && (
+            <span class={freeSpotsChange > 0 ? "text-success" : "text-error"}>
+              {" "}({formatChange(freeSpotsChange)})
+            </span>
+          )}
+          {freeSpotsChange === 0 && (
+            <span class="text-base-content/50"> (brez sprememb)</span>
+          )}
         </div>
       </div>
 
@@ -167,6 +196,14 @@ const formatCurrency = (num: number) =>
         </div>
         <div class="stat-desc">
           {formatNumber(allApplications.registered)} vseh prijav
+          {activeApplicationsChange !== null && activeApplicationsChange !== 0 && (
+            <span class={activeApplicationsChange < 0 ? "text-success" : "text-error"}>
+              {" "}({formatChange(activeApplicationsChange)})
+            </span>
+          )}
+          {activeApplicationsChange === 0 && (
+            <span class="text-base-content/50"> (brez sprememb)</span>
+          )}
         </div>
       </div>
 
@@ -194,6 +231,14 @@ const formatCurrency = (num: number) =>
         </div>
         <div class="stat-desc">
           {formatNumber(allApplicants.registered)} vseh prosilcev
+          {activeApplicantsChange !== null && activeApplicantsChange !== 0 && (
+            <span class={activeApplicantsChange < 0 ? "text-success" : "text-error"}>
+              {" "}({formatChange(activeApplicantsChange)})
+            </span>
+          )}
+          {activeApplicantsChange === 0 && (
+            <span class="text-base-content/50"> (brez sprememb)</span>
+          )}
         </div>
       </div>
     </div>
