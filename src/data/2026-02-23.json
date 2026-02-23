@@ -1,0 +1,1389 @@
+{
+  "extractedAt": "2024-05-22T10:00:00Z",
+  "data": {
+    "title": "PREGLED PROŠENJ IN PROSTIH MEST V DOMOVIH ZA STAREJŠE IN POSEBNIH SOCIALNO VARSTVENIH ZAVODIH",
+    "reportDate": "nedelja, 22. februar 2026",
+    "legend": {
+      "J": "javni zavod – dom za starejše",
+      "Z": "zasebni dom za starejše s koncesijo",
+      "P": "posebni zavod oz. enota za varstvo odraslih s posebnimi potrebami"
+    },
+    "regions": [
+      {
+        "name": "CELJE",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "J",
+            "name": "Dom ob Savinji, Celje",
+            "capacity": 252,
+            "freeSpots": 0,
+            "registeredApplications": 2403,
+            "activeApplications": 1156
+          },
+          {
+            "id": 2,
+            "type": "Z",
+            "name": "Dom sveti Jožef, Celje",
+            "capacity": 123,
+            "freeSpots": 0,
+            "registeredApplications": 1221,
+            "activeApplications": 19
+          },
+          {
+            "id": 3,
+            "type": "Z",
+            "name": "THERMANA d.o.o., Dom za starejše, Laško",
+            "capacity": 165,
+            "freeSpots": 0,
+            "registeredApplications": 685,
+            "activeApplications": 342
+          },
+          {
+            "id": 4,
+            "type": "J",
+            "name": "\"Lambrechtov dom\" Slovenske Konjice",
+            "capacity": 164,
+            "freeSpots": 0,
+            "registeredApplications": 983,
+            "activeApplications": 565
+          },
+          {
+            "id": 5,
+            "type": "J",
+            "name": "Dom starejših Šentjur",
+            "capacity": 167,
+            "freeSpots": 0,
+            "registeredApplications": 1077,
+            "activeApplications": 337
+          },
+          {
+            "id": 6,
+            "type": "J",
+            "name": "Dom upokojencev Šmarje pri Jelšah",
+            "capacity": 214,
+            "freeSpots": 0,
+            "registeredApplications": 1089,
+            "activeApplications": 10
+          },
+          {
+            "id": 7,
+            "type": "Z",
+            "name": "Lipa Celje, Dom Štore",
+            "capacity": 206,
+            "freeSpots": 0,
+            "registeredApplications": 913,
+            "activeApplications": 286
+          },
+          {
+            "id": 8,
+            "type": "J",
+            "name": "Dom upokojencev Polzela",
+            "capacity": 224,
+            "freeSpots": 0,
+            "registeredApplications": 1262,
+            "activeApplications": 94
+          },
+          {
+            "id": 9,
+            "type": "Z",
+            "name": "Mavida domovi d.o.o., Podružnica Rogaška Slatina",
+            "capacity": 131,
+            "freeSpots": 0,
+            "registeredApplications": 52,
+            "activeApplications": 16
+          },
+          {
+            "id": 10,
+            "type": "Z",
+            "name": "SeneCura Dom starejših občanov Vojnik d.o.o.",
+            "capacity": 169,
+            "freeSpots": 0,
+            "registeredApplications": 475,
+            "activeApplications": 22
+          },
+          {
+            "id": 11,
+            "type": "Z",
+            "name": "Zavod sv. Rafaela, Vransko",
+            "capacity": 63,
+            "freeSpots": 0,
+            "registeredApplications": 317,
+            "activeApplications": 143
+          },
+          {
+            "id": 12,
+            "type": "P",
+            "name": "Dom Nine Pokorn Grmovje, Žalec",
+            "capacity": 255,
+            "freeSpots": 0,
+            "registeredApplications": 187,
+            "activeApplications": 46
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 2133,
+            "freeSpots": 0,
+            "registered": 10664,
+            "active": 3036
+          },
+          "totalApplicants": {
+            "registered": 6099,
+            "active": 2296
+          }
+        }
+      },
+      {
+        "name": "KOPER",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "Z",
+            "name": "DEOS Ljubljana, PE Center starejših Koper",
+            "capacity": 214,
+            "freeSpots": 0,
+            "registeredApplications": 887,
+            "activeApplications": 240
+          },
+          {
+            "id": 2,
+            "type": "J",
+            "name": "Dom starejših občanov Ilirska Bistrica",
+            "capacity": 231,
+            "freeSpots": 0,
+            "registeredApplications": 470,
+            "activeApplications": 428
+          },
+          {
+            "id": 3,
+            "type": "J",
+            "name": "Dom upokojencev Izola",
+            "capacity": 205,
+            "freeSpots": 0,
+            "registeredApplications": 981,
+            "activeApplications": 485
+          },
+          {
+            "id": 4,
+            "type": "J",
+            "name": "Obalni dom upokojencev Koper",
+            "capacity": 179,
+            "freeSpots": 0,
+            "registeredApplications": 1451,
+            "activeApplications": 1338
+          },
+          {
+            "id": 5,
+            "type": "Z",
+            "name": "Center za starejše občane Lucija, Piran",
+            "capacity": 164,
+            "freeSpots": 0,
+            "registeredApplications": 833,
+            "activeApplications": 481
+          },
+          {
+            "id": 6,
+            "type": "J",
+            "name": "Dom upokojencev Postojna",
+            "capacity": 164,
+            "freeSpots": 0,
+            "registeredApplications": 430,
+            "activeApplications": 109
+          },
+          {
+            "id": 7,
+            "type": "Z",
+            "name": "Talita Kum zavod Postojna",
+            "capacity": 42,
+            "freeSpots": 0,
+            "registeredApplications": 299,
+            "activeApplications": 284
+          },
+          {
+            "id": 8,
+            "type": "J",
+            "name": "Dom upokojencev Sežana",
+            "capacity": 196,
+            "freeSpots": 0,
+            "registeredApplications": 773,
+            "activeApplications": 723
+          },
+          {
+            "id": 9,
+            "type": "P",
+            "name": "Dom na Krasu Dutovlje",
+            "capacity": 173,
+            "freeSpots": 0,
+            "registeredApplications": 52,
+            "activeApplications": 41
+          },
+          {
+            "id": 10,
+            "type": "Z",
+            "name": "SeneCura d.o.o., Pivka",
+            "capacity": 64,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 11,
+            "type": "J",
+            "name": "Dom upokojencev Ptuj, Enota Olmo, Koper",
+            "capacity": 150,
+            "freeSpots": 0,
+            "registeredApplications": 754,
+            "activeApplications": 544
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 1782,
+            "freeSpots": 0,
+            "registered": 6930,
+            "active": 4673
+          },
+          "totalApplicants": {
+            "registered": 4043,
+            "active": 3065
+          }
+        }
+      },
+      {
+        "name": "KRANJ",
+        "facilities": [
+          {
+            "id": 1.1,
+            "type": "Z",
+            "name": "Mavida domovi d.o.o. - Podružnica Kranjska Gora",
+            "capacity": 134,
+            "freeSpots": 0,
+            "registeredApplications": 487,
+            "activeApplications": 431
+          },
+          {
+            "id": 1.2,
+            "type": "Z",
+            "name": "Mavida domovi d.o.o. - Podružnica Šenčur",
+            "capacity": 157,
+            "freeSpots": 0,
+            "registeredApplications": 403,
+            "activeApplications": 389
+          },
+          {
+            "id": 2,
+            "type": "Z",
+            "name": "Dom sv.Martina, Srednja vas, Bohinj",
+            "capacity": 70,
+            "freeSpots": 0,
+            "registeredApplications": 542,
+            "activeApplications": 513
+          },
+          {
+            "id": 3,
+            "type": "J",
+            "name": "Dom upokojencev dr. Franceta Bergelja Jesenice",
+            "capacity": 200,
+            "freeSpots": 0,
+            "registeredApplications": 770,
+            "activeApplications": 202
+          },
+          {
+            "id": 4,
+            "type": "J",
+            "name": "Dom upokojencev Kranj",
+            "capacity": 214,
+            "freeSpots": 0,
+            "registeredApplications": 2312,
+            "activeApplications": 449
+          },
+          {
+            "id": 5,
+            "type": "J",
+            "name": "Dom starejših občanov Preddvor, Enota Preddvor",
+            "capacity": 187,
+            "freeSpots": 0,
+            "registeredApplications": 1419,
+            "activeApplications": 1097
+          },
+          {
+            "id": 6,
+            "type": "J",
+            "name": "Dom dr. Janka Benedika Radovljica",
+            "capacity": 222,
+            "freeSpots": 0,
+            "registeredApplications": 1465,
+            "activeApplications": 498
+          },
+          {
+            "id": 7,
+            "type": "J",
+            "name": "Center slepih, slabovidnih in starejših Škofja Loka",
+            "capacity": 220,
+            "freeSpots": 0,
+            "registeredApplications": 1343,
+            "activeApplications": 443
+          },
+          {
+            "id": 8.1,
+            "type": "J",
+            "name": "Dom Petra Uzarja Tržič",
+            "capacity": 181,
+            "freeSpots": 0,
+            "registeredApplications": 1770,
+            "activeApplications": 1007
+          },
+          {
+            "id": 8.2,
+            "type": "J",
+            "name": "Dom Petra Uzarja - Enota Naklo",
+            "capacity": 54,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 9,
+            "type": "Z",
+            "name": "SVZ Taber Cerklje",
+            "capacity": 156,
+            "freeSpots": 0,
+            "registeredApplications": 1150,
+            "activeApplications": 1043
+          },
+          {
+            "id": 10,
+            "type": "Z",
+            "name": "SeneCura d.o.o., Žiri",
+            "capacity": 56,
+            "freeSpots": 0,
+            "registeredApplications": 486,
+            "activeApplications": 1
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 1851,
+            "freeSpots": 0,
+            "registered": 12147,
+            "active": 6073
+          },
+          "totalApplicants": {
+            "registered": 7034,
+            "active": 3724
+          }
+        }
+      },
+      {
+        "name": "KRŠKO",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "J",
+            "name": "Dom starejših občanov Krško",
+            "capacity": 214,
+            "freeSpots": 0,
+            "registeredApplications": 649,
+            "activeApplications": 475
+          },
+          {
+            "id": 2.1,
+            "type": "J",
+            "name": "DUO Impoljca - Enota Brežice",
+            "capacity": 156,
+            "freeSpots": 0,
+            "registeredApplications": 407,
+            "activeApplications": 384
+          },
+          {
+            "id": 2.2,
+            "type": "J",
+            "name": "DUO Impoljca - Enota Impoljca",
+            "capacity": 305,
+            "freeSpots": 0,
+            "registeredApplications": 724,
+            "activeApplications": 629
+          },
+          {
+            "id": 2.3,
+            "type": "J",
+            "name": "DUO Impoljca - Enota Sevnica",
+            "capacity": 95,
+            "freeSpots": 0,
+            "registeredApplications": 368,
+            "activeApplications": 338
+          },
+          {
+            "id": 3,
+            "type": "J",
+            "name": "Trubarjev dom upokojencev Loka pri Zidanem mostu",
+            "capacity": 221,
+            "freeSpots": 0,
+            "registeredApplications": 612,
+            "activeApplications": 571
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 991,
+            "freeSpots": 0,
+            "registered": 2760,
+            "active": 2397
+          },
+          "totalApplicants": {
+            "registered": 1786,
+            "active": 1510
+          }
+        }
+      },
+      {
+        "name": "LJUBLJANA",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "J",
+            "name": "Dom upokojencev Domžale",
+            "capacity": 170,
+            "freeSpots": 0,
+            "registeredApplications": 1335,
+            "activeApplications": 570
+          },
+          {
+            "id": 2,
+            "type": "Z",
+            "name": "Zavod sv.Terezije, Videm, Dobrepolje",
+            "capacity": 77,
+            "freeSpots": 0,
+            "registeredApplications": 292,
+            "activeApplications": 225
+          },
+          {
+            "id": 3.1,
+            "type": "J",
+            "name": "DSO Grosuplje - Enota Grosuplje",
+            "capacity": 187,
+            "freeSpots": 0,
+            "registeredApplications": 1436,
+            "activeApplications": 1072
+          },
+          {
+            "id": 3.2,
+            "type": "J",
+            "name": "DSO Grosuplje - Enota Loški potok",
+            "capacity": 60,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 4,
+            "type": "J",
+            "name": "Dom starejših Hrastnik",
+            "capacity": 132,
+            "freeSpots": 1,
+            "registeredApplications": 129,
+            "activeApplications": 13
+          },
+          {
+            "id": 5.1,
+            "type": "Z",
+            "name": "DU Idrija - Enota Idrija",
+            "capacity": 153,
+            "freeSpots": 0,
+            "registeredApplications": 655,
+            "activeApplications": 429
+          },
+          {
+            "id": 5.2,
+            "type": "Z",
+            "name": "DU Idrija - Enota Marof",
+            "capacity": 142,
+            "freeSpots": 0,
+            "registeredApplications": 230,
+            "activeApplications": 95
+          },
+          {
+            "id": 6.1,
+            "type": "Z",
+            "name": "SVZ Vitadom - PE Dom Bor, Črni vrh",
+            "capacity": 138,
+            "freeSpots": 0,
+            "registeredApplications": 625,
+            "activeApplications": 78
+          },
+          {
+            "id": 6.2,
+            "type": "Z",
+            "name": "SVZ Vitadom - PE DSO Škofljica",
+            "capacity": 156,
+            "freeSpots": 0,
+            "registeredApplications": 845,
+            "activeApplications": 396
+          },
+          {
+            "id": 7,
+            "type": "J",
+            "name": "Dom starejših občanov Kamnik",
+            "capacity": 191,
+            "freeSpots": 0,
+            "registeredApplications": 1435,
+            "activeApplications": 20
+          },
+          {
+            "id": 8,
+            "type": "J",
+            "name": "Dom starejših občanov Kočevje",
+            "capacity": 173,
+            "freeSpots": 0,
+            "registeredApplications": 188,
+            "activeApplications": 107
+          },
+          {
+            "id": 9,
+            "type": "J",
+            "name": "Dom \"Tisje\" Šmartno pri Litiji",
+            "capacity": 249,
+            "freeSpots": 0,
+            "registeredApplications": 977,
+            "activeApplications": 956
+          },
+          {
+            "id": 10,
+            "type": "J",
+            "name": "DSO Ljubljana - Bežigrad",
+            "capacity": 220,
+            "freeSpots": 0,
+            "registeredApplications": 2622,
+            "activeApplications": 536
+          },
+          {
+            "id": 11,
+            "type": "J",
+            "name": "Dom upokojencev Center, Tabor-Poljane",
+            "capacity": 477,
+            "freeSpots": 0,
+            "registeredApplications": 3159,
+            "activeApplications": 1385
+          },
+          {
+            "id": 12,
+            "type": "J",
+            "name": "DSO Fužine, Ljubljana",
+            "capacity": 214,
+            "freeSpots": 0,
+            "registeredApplications": 4499,
+            "activeApplications": 1804
+          },
+          {
+            "id": 13,
+            "type": "J",
+            "name": "DSO Ljubljana Moste-Polje",
+            "capacity": 212,
+            "freeSpots": 0,
+            "registeredApplications": 2317,
+            "activeApplications": 916
+          },
+          {
+            "id": 14,
+            "type": "J",
+            "name": "DSO Ljubljana - Šiška",
+            "capacity": 230,
+            "freeSpots": 0,
+            "registeredApplications": 3527,
+            "activeApplications": 1386
+          },
+          {
+            "id": 15.1,
+            "type": "J",
+            "name": "DSO Ljubljana Vič-Rudnik - Enota Bokalci",
+            "capacity": 378,
+            "freeSpots": 0,
+            "registeredApplications": 2914,
+            "activeApplications": 1585
+          },
+          {
+            "id": 15.2,
+            "type": "J",
+            "name": "DSO Ljubljana Vič-Rudnik - Enota Kolezija",
+            "capacity": 192,
+            "freeSpots": 0,
+            "registeredApplications": 2236,
+            "activeApplications": 856
+          },
+          {
+            "id": 16,
+            "type": "Z",
+            "name": "Dom Janeza Krstnika, Karitas-Trnovo",
+            "capacity": 66,
+            "freeSpots": 0,
+            "registeredApplications": 827,
+            "activeApplications": 678
+          },
+          {
+            "id": 17.1,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Cerknica",
+            "capacity": 157,
+            "freeSpots": 0,
+            "registeredApplications": 618,
+            "activeApplications": 9
+          },
+          {
+            "id": 17.2,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Trnovo",
+            "capacity": 157,
+            "freeSpots": 0,
+            "registeredApplications": 2156,
+            "activeApplications": 636
+          },
+          {
+            "id": 17.3,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Medvode",
+            "capacity": 195,
+            "freeSpots": 0,
+            "registeredApplications": 1866,
+            "activeApplications": 46
+          },
+          {
+            "id": 17.4,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Horjul",
+            "capacity": 155,
+            "freeSpots": 0,
+            "registeredApplications": 972,
+            "activeApplications": 598
+          },
+          {
+            "id": 17.5,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Notranje Gorice",
+            "capacity": 205,
+            "freeSpots": 0,
+            "registeredApplications": 1882,
+            "activeApplications": 88
+          },
+          {
+            "id": 17.6,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Črnuče",
+            "capacity": 157,
+            "freeSpots": 0,
+            "registeredApplications": 1474,
+            "activeApplications": 164
+          },
+          {
+            "id": 18,
+            "type": "J",
+            "name": "Dom starejših Logatec",
+            "capacity": 159,
+            "freeSpots": 0,
+            "registeredApplications": 1109,
+            "activeApplications": 19
+          },
+          {
+            "id": 19,
+            "type": "Z",
+            "name": "Dom Marije in Marte Logatec",
+            "capacity": 76,
+            "freeSpots": 0,
+            "registeredApplications": 561,
+            "activeApplications": 238
+          },
+          {
+            "id": 20.1,
+            "type": "J",
+            "name": "Dom počitka Mengeš - Enota Mengeš",
+            "capacity": 195,
+            "freeSpots": 0,
+            "registeredApplications": 2241,
+            "activeApplications": 2099
+          },
+          {
+            "id": 20.2,
+            "type": "J",
+            "name": "Dom počitka Mengeš - Enota Trzin",
+            "capacity": 57,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 21,
+            "type": "Z",
+            "name": "Mavida Ribnica d.o.o.",
+            "capacity": 154,
+            "freeSpots": 0,
+            "registeredApplications": 224,
+            "activeApplications": 188
+          },
+          {
+            "id": 22.1,
+            "type": "J",
+            "name": "DU Franca Salamona - Enota Trbovlje",
+            "capacity": 190,
+            "freeSpots": 0,
+            "registeredApplications": 604,
+            "activeApplications": 349
+          },
+          {
+            "id": 22.2,
+            "type": "J",
+            "name": "DU Franca Salamona - Enota Prebold",
+            "capacity": 155,
+            "freeSpots": 0,
+            "registeredApplications": 616,
+            "activeApplications": 413
+          },
+          {
+            "id": 23,
+            "type": "J",
+            "name": "Dom upokojencev Vrhnika",
+            "capacity": 242,
+            "freeSpots": 0,
+            "registeredApplications": 1369,
+            "activeApplications": 475
+          },
+          {
+            "id": 24,
+            "type": "J",
+            "name": "DSO \"Polde Eberl-Jamski\" Izlake",
+            "capacity": 186,
+            "freeSpots": 0,
+            "registeredApplications": 913,
+            "activeApplications": 6
+          },
+          {
+            "id": 25,
+            "type": "P",
+            "name": "DVZ Prizma, Ponikve",
+            "capacity": 144,
+            "freeSpots": 0,
+            "registeredApplications": 191,
+            "activeApplications": 167
+          },
+          {
+            "id": 26,
+            "type": "Z",
+            "name": "Zavod usmiljenk",
+            "capacity": 60,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 27,
+            "type": "Z",
+            "name": "IMP, d.d., Center Bistrica, Domžale",
+            "capacity": 100,
+            "freeSpots": 0,
+            "registeredApplications": 1075,
+            "activeApplications": 904
+          },
+          {
+            "id": 28,
+            "type": "Z",
+            "name": "SeneCura d.o.o., Komenda",
+            "capacity": 68,
+            "freeSpots": 0,
+            "registeredApplications": 840,
+            "activeApplications": 1
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 6629,
+            "freeSpots": 1,
+            "registered": 48959,
+            "active": 19507
+          },
+          "totalApplicants": {
+            "registered": 18548,
+            "active": 9153
+          }
+        }
+      },
+      {
+        "name": "MARIBOR",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "J",
+            "name": "Dom upokojencev Ptuj, Enota Žabjak",
+            "capacity": 150,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 2,
+            "type": "Z",
+            "name": "Dom Lenart",
+            "capacity": 235,
+            "freeSpots": 0,
+            "registeredApplications": 858,
+            "activeApplications": 211
+          },
+          {
+            "id": 3,
+            "type": "Z",
+            "name": "DEOS Ljubljana, PE Idila",
+            "capacity": 0,
+            "freeSpots": 0,
+            "registeredApplications": 468,
+            "activeApplications": 10
+          },
+          {
+            "id": 4.1,
+            "type": "J",
+            "name": "Dom Danice Vogrinec - Enota Pobrežje",
+            "capacity": 609,
+            "freeSpots": 0,
+            "registeredApplications": 2317,
+            "activeApplications": 11
+          },
+          {
+            "id": 4.2,
+            "type": "J",
+            "name": "Dom Danice Vogrinec - Enota Tabor",
+            "capacity": 200,
+            "freeSpots": 0,
+            "registeredApplications": 127,
+            "activeApplications": 4
+          },
+          {
+            "id": 5,
+            "type": "J",
+            "name": "DSO Tezno, Maribor",
+            "capacity": 222,
+            "freeSpots": 0,
+            "registeredApplications": 1420,
+            "activeApplications": 823
+          },
+          {
+            "id": 6,
+            "type": "Z",
+            "name": "SeneCura Maribor",
+            "capacity": 166,
+            "freeSpots": 0,
+            "registeredApplications": 1250,
+            "activeApplications": 41
+          },
+          {
+            "id": 7,
+            "type": "Z",
+            "name": "Dom pod Gorco, Maribor",
+            "capacity": 154,
+            "freeSpots": 0,
+            "registeredApplications": 852,
+            "activeApplications": 647
+          },
+          {
+            "id": 8,
+            "type": "Z",
+            "name": "Center za starejše občane Ormož",
+            "capacity": 193,
+            "freeSpots": 0,
+            "registeredApplications": 529,
+            "activeApplications": 40
+          },
+          {
+            "id": 9.1,
+            "type": "J",
+            "name": "Dom upokojencev Ptuj - sedež",
+            "capacity": 324,
+            "freeSpots": 0,
+            "registeredApplications": 1532,
+            "activeApplications": 213
+          },
+          {
+            "id": 9.2,
+            "type": "J",
+            "name": "Dom upokojencev Ptuj - Enota Muretinci",
+            "capacity": 119,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 9.3,
+            "type": "J",
+            "name": "Dom upokojencev Ptuj - Enota Kidričevo",
+            "capacity": 69,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 9.4,
+            "type": "J",
+            "name": "Dom upokojencev Ptuj - Enota Juršinci",
+            "capacity": 151,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 10.1,
+            "type": "J",
+            "name": "Dom dr. Jožeta Potrča Poljčane - Enota Poljčane",
+            "capacity": 230,
+            "freeSpots": 0,
+            "registeredApplications": 548,
+            "activeApplications": 139
+          },
+          {
+            "id": 10.2,
+            "type": "J",
+            "name": "Dom dr. Jožeta Potrča Poljčane - Enota Slov. Bistrica",
+            "capacity": 124,
+            "freeSpots": 0,
+            "registeredApplications": 453,
+            "activeApplications": 235
+          },
+          {
+            "id": 11,
+            "type": "P",
+            "name": "Zavod Hrastovec - Trate, Lenart",
+            "capacity": 686,
+            "freeSpots": 16,
+            "registeredApplications": 429,
+            "activeApplications": 31
+          },
+          {
+            "id": 12,
+            "type": "Z",
+            "name": "SeneCura Hoče-Slivnica",
+            "capacity": 150,
+            "freeSpots": 0,
+            "registeredApplications": 1093,
+            "activeApplications": 0
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 3782,
+            "freeSpots": 16,
+            "registered": 11876,
+            "active": 2405
+          },
+          "totalApplicants": {
+            "registered": 6765,
+            "active": 2097
+          }
+        }
+      },
+      {
+        "name": "MURSKA SOBOTA",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "Z",
+            "name": "Zavod sv.Cirila in Metoda, Beltinci",
+            "capacity": 85,
+            "freeSpots": 0,
+            "registeredApplications": 74,
+            "activeApplications": 43
+          },
+          {
+            "id": 2,
+            "type": "Z",
+            "name": "DSO Gornja Radgona",
+            "capacity": 150,
+            "freeSpots": 0,
+            "registeredApplications": 379,
+            "activeApplications": 309
+          },
+          {
+            "id": 3,
+            "type": "Z",
+            "name": "Dom Kuzma d.o.o.",
+            "capacity": 64,
+            "freeSpots": 0,
+            "registeredApplications": 8,
+            "activeApplications": 6
+          },
+          {
+            "id": 4,
+            "type": "J",
+            "name": "Dom starejših Lendava",
+            "capacity": 172,
+            "freeSpots": 0,
+            "registeredApplications": 22,
+            "activeApplications": 6
+          },
+          {
+            "id": 5.1,
+            "type": "J",
+            "name": "DSO Ljutomer - Enota Ljutomer",
+            "capacity": 152,
+            "freeSpots": 0,
+            "registeredApplications": 104,
+            "activeApplications": 75
+          },
+          {
+            "id": 5.2,
+            "type": "J",
+            "name": "DSO Ljutomer - Enota Stročja vas",
+            "capacity": 24,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 6.1,
+            "type": "J",
+            "name": "Dom starejših Rakičan - sedež",
+            "capacity": 271,
+            "freeSpots": 0,
+            "registeredApplications": 303,
+            "activeApplications": 214
+          },
+          {
+            "id": 6.2,
+            "type": "J",
+            "name": "Dom starejših Rakičan - Enota Sv. Elizabeta",
+            "capacity": 51,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 6.3,
+            "type": "J",
+            "name": "Dom starejših Rakičan - Enota Murska Sobota",
+            "capacity": 66,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 7,
+            "type": "Z",
+            "name": "SeneCura Dom starejših Radenci d.o.o.",
+            "capacity": 178,
+            "freeSpots": 0,
+            "registeredApplications": 397,
+            "activeApplications": 53
+          },
+          {
+            "id": 8,
+            "type": "Z",
+            "name": "Zavod Karion, Dom Velika Polana",
+            "capacity": 66,
+            "freeSpots": 0,
+            "registeredApplications": 71,
+            "activeApplications": 56
+          },
+          {
+            "id": 9,
+            "type": "P",
+            "name": "Dom Lukavci, Križevci pri Ljutomeru",
+            "capacity": 321,
+            "freeSpots": 0,
+            "registeredApplications": 101,
+            "activeApplications": 91
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 1600,
+            "freeSpots": 0,
+            "registered": 1459,
+            "active": 853
+          },
+          "totalApplicants": {
+            "registered": 1238,
+            "active": 792
+          }
+        }
+      },
+      {
+        "name": "NOVA GORICA",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "J",
+            "name": "Dom starejših občanov Ajdovščina",
+            "capacity": 151,
+            "freeSpots": 0,
+            "registeredApplications": 546,
+            "activeApplications": 376
+          },
+          {
+            "id": 2.1,
+            "type": "J",
+            "name": "DU Nova Gorica - sedež",
+            "capacity": 201,
+            "freeSpots": 0,
+            "registeredApplications": 340,
+            "activeApplications": 59
+          },
+          {
+            "id": 2.2,
+            "type": "J",
+            "name": "DU Nova Gorica - Enota Podsabotin",
+            "capacity": 91,
+            "freeSpots": 0,
+            "registeredApplications": "NI PODATKA",
+            "activeApplications": null
+          },
+          {
+            "id": 3,
+            "type": "J",
+            "name": "Dom upokojencev Gradišče",
+            "capacity": 143,
+            "freeSpots": 0,
+            "registeredApplications": 631,
+            "activeApplications": 527
+          },
+          {
+            "id": 4,
+            "type": "Z",
+            "name": "TURZIS, Renče",
+            "capacity": 54,
+            "freeSpots": 0,
+            "registeredApplications": 306,
+            "activeApplications": 5
+          },
+          {
+            "id": 5.1,
+            "type": "J",
+            "name": "DU Podbrdo - Enota Tolmin",
+            "capacity": 136,
+            "freeSpots": 0,
+            "registeredApplications": 194,
+            "activeApplications": 161
+          },
+          {
+            "id": 5.2,
+            "type": "J",
+            "name": "DU Podbrdo - Enota Petrovo brdo",
+            "capacity": 95,
+            "freeSpots": 0,
+            "registeredApplications": 105,
+            "activeApplications": 78
+          },
+          {
+            "id": 5.3,
+            "type": "J",
+            "name": "DU Podbrdo - sedež zavoda",
+            "capacity": 138,
+            "freeSpots": 0,
+            "registeredApplications": 353,
+            "activeApplications": 305
+          },
+          {
+            "id": 6,
+            "type": "Z",
+            "name": "Zavod Pristan, Center starejših, Vipava",
+            "capacity": 104,
+            "freeSpots": 0,
+            "registeredApplications": 510,
+            "activeApplications": 406
+          },
+          {
+            "id": 7,
+            "type": "J",
+            "name": "Dom starejših občanov Vrtojba",
+            "capacity": 150,
+            "freeSpots": 0,
+            "registeredApplications": 477,
+            "activeApplications": 60
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 1263,
+            "freeSpots": 0,
+            "registered": 3462,
+            "active": 1977
+          },
+          "totalApplicants": {
+            "registered": 2146,
+            "active": 1366
+          }
+        }
+      },
+      {
+        "name": "NOVO MESTO",
+        "facilities": [
+          {
+            "id": 1,
+            "type": "J",
+            "name": "Dom starejših občanov Črnomelj",
+            "capacity": 191,
+            "freeSpots": 0,
+            "registeredApplications": 295,
+            "activeApplications": 117
+          },
+          {
+            "id": 2,
+            "type": "J",
+            "name": "Dom počitka Metlika",
+            "capacity": 172,
+            "freeSpots": 0,
+            "registeredApplications": 486,
+            "activeApplications": 6
+          },
+          {
+            "id": 3,
+            "type": "J",
+            "name": "Dom starejših občanov Novo mesto",
+            "capacity": 350,
+            "freeSpots": 0,
+            "registeredApplications": 1241,
+            "activeApplications": 212
+          },
+          {
+            "id": 4,
+            "type": "Z",
+            "name": "Penzion Sreča, Šmarješke Toplice",
+            "capacity": 38,
+            "freeSpots": 0,
+            "registeredApplications": 297,
+            "activeApplications": 3
+          },
+          {
+            "id": 5.1,
+            "type": "J",
+            "name": "DSO Trebnje - Enota Trebnje",
+            "capacity": 178,
+            "freeSpots": 0,
+            "registeredApplications": 1061,
+            "activeApplications": 19
+          },
+          {
+            "id": 5.2,
+            "type": "J",
+            "name": "DSO Trebnje - Enota Šmarješke Toplice",
+            "capacity": 36,
+            "freeSpots": 0,
+            "registeredApplications": 0,
+            "activeApplications": 0
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 965,
+            "freeSpots": 0,
+            "registered": 3380,
+            "active": 357
+          },
+          "totalApplicants": {
+            "registered": 2325,
+            "active": 353
+          }
+        }
+      },
+      {
+        "name": "RAVNE NA KOROŠKEM",
+        "facilities": [
+          {
+            "id": 1.1,
+            "type": "J",
+            "name": "Koroški dom starostnikov - Enota Črneče",
+            "capacity": 263,
+            "freeSpots": 0,
+            "registeredApplications": 786,
+            "activeApplications": 746
+          },
+          {
+            "id": 1.2,
+            "type": "J",
+            "name": "Koroški dom starostnikov - Enota Slovenj Gradec",
+            "capacity": 92,
+            "freeSpots": 0,
+            "registeredApplications": 599,
+            "activeApplications": 572
+          },
+          {
+            "id": 2,
+            "type": "Z",
+            "name": "Zavod Karion, Dom Sv. Eme",
+            "capacity": 21,
+            "freeSpots": 0,
+            "registeredApplications": 43,
+            "activeApplications": 31
+          },
+          {
+            "id": 3.1,
+            "type": "Z",
+            "name": "DEOS - PE Center starejših Gornji grad",
+            "capacity": 202,
+            "freeSpots": 0,
+            "registeredApplications": 592,
+            "activeApplications": 10
+          },
+          {
+            "id": 3.2,
+            "type": "Z",
+            "name": "DEOS - PE Center za starejše Zimzelen",
+            "capacity": 157,
+            "freeSpots": 0,
+            "registeredApplications": 781,
+            "activeApplications": 8
+          },
+          {
+            "id": 4,
+            "type": "J",
+            "name": "Dom starejših na Fari, Prevalje",
+            "capacity": 190,
+            "freeSpots": 0,
+            "registeredApplications": 623,
+            "activeApplications": 69
+          },
+          {
+            "id": 5,
+            "type": "Z",
+            "name": "Mavida Radlje, d.o.o.",
+            "capacity": 152,
+            "freeSpots": 0,
+            "registeredApplications": 263,
+            "activeApplications": 212
+          },
+          {
+            "id": 6,
+            "type": "J",
+            "name": "Dom za varstvo odraslih Velenje",
+            "capacity": 190,
+            "freeSpots": 0,
+            "registeredApplications": 1003,
+            "activeApplications": 906
+          }
+        ],
+        "totals": {
+          "totalApplications": {
+            "capacity": 1267,
+            "freeSpots": 0,
+            "registered": 4690,
+            "active": 2554
+          },
+          "totalApplicants": {
+            "registered": 3058,
+            "active": 1938
+          }
+        }
+      }
+    ],
+    "grandTotals": {
+      "allApplications": {
+        "capacity": 22263,
+        "freeSpots": 17,
+        "registered": 106327,
+        "active": 43832
+      },
+      "allApplicants": {
+        "registered": 41693,
+        "active": 20787
+      }
+    }
+  },
+  "_metadata": {
+    "source": "https://servis.ssz-slo.si/porocilo.pdf",
+    "extractedAt": "2026-02-23T09:37:55.795Z",
+    "script": "extract-pdf-data.js"
+  }
+}
