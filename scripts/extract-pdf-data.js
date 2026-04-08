@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PDF_URL = "https://servis.ssz-slo.si/porocilo.pdf";
-const MODEL = process.env.MODEL || "anthropic/claude-sonnet-4";
+const MODEL = process.env.MODEL || "google/gemini-3.1-flash-lite-preview";
 const PROMPT = fs.readFileSync(path.join(__dirname, "prompt.txt"), "utf-8");
 
 if (!process.env.OPEN_ROUTER) {
@@ -18,42 +18,50 @@ if (!process.env.OPEN_ROUTER) {
 async function extractDataWithOpenRouter() {
   console.log("Extracting data from PDF:", PDF_URL);
   console.log("Using model:", MODEL);
-const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.OPEN_ROUTER}`,
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    model: MODEL,
-    messages: [
-      {
-        role: "user",
-        content: [
-          { type: "text", text: PROMPT },
-          {
-            type: "file",
-            file: {
-              filename: "porocilo.pdf",
-              file_data: PDF_URL,
+  const pdfResp = await fetch(PDF_URL);
+  if (!pdfResp.ok) {
+    throw new Error(`Failed to download PDF: ${pdfResp.status} ${pdfResp.statusText}`);
+  }
+
+  const pdfBuffer = Buffer.from(await pdfResp.arrayBuffer());
+  const pdfBase64 = pdfBuffer.toString("base64");
+
+  const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.OPEN_ROUTER}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: PROMPT },
+            {
+              type: "file",
+              file: {
+                filename: "porocilo.pdf",
+                file_data: `data:application/pdf;base64,${pdfBase64}`,
+              },
             },
-          },
-        ],
-      },
-    ],
-    plugins: [
-      { id: "file-parser", pdf: { engine: "pdf-text" } },
-    ],
-    stream: false,
-  }),
-});
+          ],
+        },
+      ],
+      stream: false,
+    }),
+  });
 
   const result = await resp.json();
+  if (!resp.ok) {
+    const apiMessage = result?.error?.message || JSON.stringify(result);
+    throw new Error(`OpenRouter ${resp.status} ${resp.statusText}: ${apiMessage}`);
+  }
 
   const content = result.choices?.[0]?.message?.content;
   if (!content) {
-    console.log(await resp.text());
-    throw new Error("No content in OpenRouter response");
+    throw new Error(`No content in OpenRouter response: ${JSON.stringify(result)}`);
   }
 
   // Extract JSON from the response (handle markdown code blocks)
