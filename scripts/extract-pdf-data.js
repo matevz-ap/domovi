@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PDF_URL = "https://servis.ssz-slo.si/porocilo.pdf";
-const MODEL = process.env.MODEL || "google/gemini-3.1-flash-lite-preview";
+const MODEL = process.env.MODEL || "google/gemini-3-flash-preview"; 
 const PROMPT = fs.readFileSync(path.join(__dirname, "prompt.txt"), "utf-8");
 
 if (!process.env.OPEN_ROUTER) {
