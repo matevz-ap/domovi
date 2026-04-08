@@ -52,6 +52,7 @@ const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
 
   const content = result.choices?.[0]?.message?.content;
   if (!content) {
+    console.log(await resp.text());
     throw new Error("No content in OpenRouter response");
   }
 
