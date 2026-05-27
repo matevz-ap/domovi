@@ -493,5 +493,10 @@
     "date": "2026-05-26",
     "freeSpots": 19,
     "activeApplications": 42673
+  },
+  {
+    "date": "2026-05-27",
+    "freeSpots": 19,
+    "activeApplications": 42646
   }
 ]
