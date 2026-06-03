@@ -6,29 +6,48 @@ const chartData = chartDataRaw as {
     freeSpots: number;
     activeApplications: number;
 }[];
+
+interface Props {
+    prominent?: boolean;
+    variant?: "panel" | "hero";
+}
+
+const { prominent = false, variant = "panel" } = Astro.props;
+const isHero = variant === "hero";
 ---
 
-<div class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title mb-4">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-                ></path>
-            </svg>
-            Trend skozi čas
-        </h2>
-        <canvas id="trendChart" class="w-full h-64"></canvas>
+<div
+    class={isHero
+        ? "absolute inset-0 -z-10"
+        : `rounded-lg border border-emerald-100 bg-gradient-to-br from-white via-white to-emerald-50/70 p-5 shadow-[0_18px_60px_rgba(15,118,110,0.10)] sm:p-6 ${prominent ? "h-full" : ""}`}
+>
+    {
+        !isHero && (
+            <div class="mb-6 flex items-start justify-between gap-4">
+                <div>
+                    <p class="text-sm font-medium text-emerald-700">Trend</p>
+                    <h2 class={`${prominent ? "text-3xl" : "text-2xl"} mt-2 font-semibold tracking-tight text-zinc-950`}>
+                        Gibanje skozi čas
+                    </h2>
+                </div>
+                <span class="rounded-full border border-emerald-200 bg-white/80 px-3 py-1 text-xs font-medium text-emerald-800">
+                    Dnevni podatki
+                </span>
+            </div>
+        )
+    }
+    <div class={isHero ? "h-full w-full" : prominent ? "h-[22rem] lg:h-[30rem]" : "h-72"}>
+        <canvas
+            id="trendChart"
+            class={isHero ? "h-full w-full opacity-95" : "h-full w-full"}
+        >
+        </canvas>
     </div>
+    {
+        isHero && (
+            <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.54)_0%,rgba(255,255,255,0.36)_36%,rgba(255,255,255,0.08)_64%,rgba(255,255,255,0)_100%)]" />
+        )
+    }
 </div>
 
 <script
@@ -40,57 +59,114 @@ const chartData = chartDataRaw as {
 <script is:inline>
     const configElement = document.getElementById("chart-data");
     const data = JSON.parse(configElement.textContent);
+    const isHeroChart = document.getElementById("trendChart").closest(".absolute") !== null;
+
+    const shortDate = (value) => {
+        const [, month, day] = value.split("-");
+        return `${day}.${month}.`;
+    };
 
     if (data.length >= 1) {
         const ctx = document.getElementById("trendChart");
+        const values = data.map((d) => d.activeApplications);
+        const minValue = Math.min(...values);
+        const maxValue = Math.max(...values);
+        const valuePadding = Math.max((maxValue - minValue) * 0.12, 250);
+
         new Chart(ctx, {
             type: "line",
             data: {
-                labels: data.map((d) => d.date),
+                labels: data.map((d) => shortDate(d.date)),
                 datasets: [
-                    {
-                        label: "Prosta mesta",
-                        data: data.map((d) => d.freeSpots),
-                        borderColor: "#36d399",
-                        backgroundColor: "rgba(54, 211, 153, 0.1)",
-                        yAxisID: "y",
-                        tension: 0.3,
-                    },
                     {
                         label: "Aktivne prošnje",
                         data: data.map((d) => d.activeApplications),
-                        borderColor: "#fbbd23",
-                        backgroundColor: "rgba(251, 189, 35, 0.1)",
-                        yAxisID: "y1",
-                        tension: 0.3,
+                        borderColor: "#f59e0b",
+                        backgroundColor: "rgba(245, 158, 11, 0.16)",
+                        yAxisID: "y",
+                        tension: 0.36,
+                        borderWidth: 4,
+                        pointRadius: 0,
+                        pointHoverRadius: 4,
+                        fill: true,
                     },
                 ],
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: isHeroChart
+                        ? { top: 34, right: 28, bottom: 22, left: 0 }
+                        : { top: 8, right: 0, bottom: 0, left: 0 },
+                },
                 interaction: {
                     mode: "index",
                     intersect: false,
                 },
+                plugins: {
+                    legend: {
+                        display: !isHeroChart,
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            color: "#78350f",
+                            font: {
+                                family:
+                                    'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                            },
+                        },
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: "#18181b",
+                        titleColor: "#ffffff",
+                        bodyColor: "#e4e4e7",
+                        borderColor: "rgba(255,255,255,0.12)",
+                        borderWidth: 1,
+                        padding: 12,
+                    },
+                },
                 scales: {
+                    x: {
+                        border: {
+                            display: false,
+                        },
+                        grid: {
+                            color: isHeroChart
+                                ? "rgba(113, 113, 122, 0.10)"
+                                : "rgba(113, 113, 122, 0.14)",
+                            tickLength: 0,
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: isHeroChart ? 9 : 7,
+                            maxRotation: isHeroChart ? 35 : 0,
+                            minRotation: 0,
+                            color: isHeroChart ? "rgba(113, 113, 122, 0.42)" : "#71717a",
+                        },
+                    },
                     y: {
                         type: "linear",
                         display: true,
                         position: "left",
-                        ticks: {
-                            stepSize: 1,
-                            precision: 0,
-                        },
-                    },
-                    y1: {
-                        type: "linear",
-                        display: true,
-                        position: "right",
-                        ticks: {
-                            precision: 0,
+                        min: minValue - valuePadding,
+                        max: maxValue + valuePadding,
+                        border: {
+                            display: false,
                         },
                         grid: {
-                            drawOnChartArea: false,
+                            color: isHeroChart
+                                ? "rgba(113, 113, 122, 0.08)"
+                                : "rgba(113, 113, 122, 0.14)",
+                            tickLength: 0,
+                        },
+                        ticks: {
+                            precision: 0,
+                            display: !isHeroChart,
+                            maxTicksLimit: 5,
+                            color: "#71717a",
                         },
                     },
                 },

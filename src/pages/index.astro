@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Chart from "../components/Chart.astro";
 
-// Load all JSON files from data directory and get the latest one
 const dataFiles = import.meta.glob("../data/*.json", { eager: true });
 const sortedFiles = Object.entries(dataFiles)
   .filter(([path]) => /\/\d{4}-\d{2}-\d{2}\.json$/.test(path))
@@ -12,13 +11,12 @@ if (sortedFiles.length === 0) {
   throw new Error("No data files found");
 }
 
-const [latestPath, latestModule] = sortedFiles[0];
+const [, latestModule] = sortedFiles[0];
 const data = latestModule as any;
 
 const { grandTotals, reportDate, regions } = data.data;
 const { allApplications, allApplicants } = grandTotals;
 
-// Calculate day-over-day changes
 let freeSpotsChange: number | null = null;
 let activeApplicationsChange: number | null = null;
 let activeApplicantsChange: number | null = null;
@@ -39,327 +37,288 @@ const formatChange = (change: number | null) => {
   return `${sign}${change.toLocaleString("sl-SI")}`;
 };
 
-// Calculate key metrics
 const occupied = allApplications.capacity - allApplications.freeSpots;
 const occupancyPercent = ((occupied / allApplications.capacity) * 100).toFixed(
   2,
 );
+const occupancyWidth = `${Math.min(100, Number(occupancyPercent)).toFixed(2)}%`;
+const freeWidth = `${Math.max(0, 100 - Number(occupancyPercent)).toFixed(2)}%`;
 const applicantsPerSpot =
   allApplications.freeSpots > 0
     ? Math.round(allApplicants.active / allApplications.freeSpots)
     : allApplicants.active;
+const totalFacilities = regions.reduce(
+  (acc, r) => acc + r.facilities.length,
+  0,
+);
 const avgApplicationsPerFacility = Math.round(
-  allApplications.active /
-    regions.reduce((acc, r) => acc + r.facilities.length, 0),
+  allApplications.active / totalFacilities,
 );
 
-// Format numbers
 const formatNumber = (num: number) => num.toLocaleString("sl-SI");
 
-// Get facilities with free spots
 const facilitiesWithSpots = regions.flatMap((r) =>
   r.facilities
     .filter((f) => f.freeSpots && f.freeSpots > 0)
     .map((f) => ({ ...f, region: r.name })),
 );
 
-// Load pricing data
 const pricingFiles = import.meta.glob("../data/pricing/*.json", {
   eager: true,
 });
 const pricingData = Object.values(pricingFiles) as any[];
 
-// Sort each facility's rooms by price (cheapest first)
 pricingData.forEach((facility: any) => {
   facility.room_pricing.sort(
     (a: any, b: any) => a.monthly_rate - b.monthly_rate,
   );
 });
 
-// Get max number of room types across all facilities
 const maxRooms = Math.max(
   ...pricingData.map((p: any) => p.room_pricing.length),
 );
 
-// Format currency
 const formatCurrency = (num: number) =>
   num.toLocaleString("sl-SI", { style: "currency", currency: "EUR" });
+
+const metricCards = [
+  {
+    label: "Aktivne prošnje",
+    value: formatNumber(allApplications.active),
+    note: `${formatNumber(allApplications.registered)} vseh prijav`,
+    change: activeApplicationsChange,
+    favorableWhenPositive: false,
+  },
+  {
+    label: "Aktivni prosilci",
+    value: formatNumber(allApplicants.active),
+    note: `${formatNumber(allApplicants.registered)} vseh prosilcev`,
+    change: activeApplicantsChange,
+    favorableWhenPositive: false,
+  },
+];
 ---
 
-<Layout>
-  <div class="container mx-auto px-4 py-8 max-w-6xl">
-    <!-- Header -->
-    <header class="text-center mb-12">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2">Domovi za starejše</h1>
-      <p class="text-base-content/60">Pregled zasedenosti v Sloveniji</p>
-      <p class="text-sm text-base-content/40 mt-2">
-        Podatki z dne: {reportDate}
-      </p>
-    </header>
+<Layout title="Domovi za starejše - Pregled kapacitet">
+  <main class="min-h-screen bg-white text-zinc-950">
+    <section class="relative isolate min-h-[720px] overflow-hidde bg-white">
+      <Chart variant="hero" />
+      <div
+        class="pointer-events-none relative z-10 mx-auto flex min-h-[620px] max-w-7xl flex-col justify-between px-5 py-7 sm:px-8 lg:px-10 lg:py-10"
+      >
+        <header class="flex items-center justify-between gap-4">
+          <a
+            href="/"
+            class="pointer-events-auto text-sm font-semibold tracking-tight text-zinc-950"
+          >
+            Domovi za starejše
+          </a>
+        </header>
 
-    <!-- Capacity Progress -->
-    <div class="card bg-base-100 shadow-xl mb-8">
-      <div class="card-body">
-        <h2 class="card-title justify-center text-2xl mb-4">
-          Zasedenost kapacitet
-        </h2>
-
-        <div class="text-center mb-4">
-          <span class="font-bold text-5xl text-error">{occupancyPercent}%</span>
+        <div class="max-w-2xl">
+          <div
+            class="mb-5 text-sm font-medium uppercase tracking-[0.16em] text-amber-700"
+          >
+            Podatki: {reportDate}
+          </div>
+          <h1
+            class="max-w-4xl text-5xl font-semibold leading-[0.96] tracking-tight text-zinc-950 sm:text-6xl lg:text-6xl"
+          >
+            Aktivne prošnje skozi čas.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
+            Pregled obremenitve domov za starejše v Sloveniji, postavljen čez
+            dnevni trend aktivnih prošenj.
+          </p>
         </div>
 
-        <!-- Visual blocks representation - Mobile (20 bars) -->
-        <div class="flex gap-1 md:hidden">
-          {
-            Array.from({ length: 20 }).map((_, i) => (
-              <div
-                class={`flex-1 h-8 rounded ${i < Math.round(Number(occupancyPercent) / 5) ? "bg-error" : "bg-success"}`}
-              />
-            ))
-          }
-        </div>
-        <!-- Visual blocks representation - Desktop (100 bars) -->
-        <div class="hidden md:flex gap-1">
-          {
-            Array.from({ length: 100 }).map((_, i) => (
-              <div
-                class={`flex-1 h-8 rounded-sm ${i < Math.round(Number(occupancyPercent)) ? "bg-error" : "bg-success"}`}
-              />
-            ))
-          }
-        </div>
-
-        <div class="flex justify-between text-sm mt-4 text-base-content/70">
-          <span>Zasedeno: {formatNumber(occupied)}</span>
-          <span>Kapaciteta: {formatNumber(allApplications.capacity)}</span>
+        <div class="grid max-w-3xl gap-3 pt-2 sm:grid-cols-3">
+          <div>
+            <p
+              class="text-xs font-medium uppercase tracking-[0.14em] text-zinc-500"
+            >
+              Prosta mesta
+            </p>
+            <p class="mt-1 text-2xl font-semibold text-zinc-950">
+              {formatNumber(allApplications.freeSpots)}
+            </p>
+          </div>
+          <div>
+            <p
+              class="text-xs font-medium uppercase tracking-[0.14em] text-zinc-500"
+            >
+              Zasedenost
+            </p>
+            <p class="mt-1 text-2xl font-semibold text-zinc-950">
+              {occupancyPercent}%
+            </p>
+          </div>
+          <div>
+            <p
+              class="text-xs font-medium uppercase tracking-[0.14em] text-zinc-500"
+            >
+              Prosilci
+            </p>
+            <p class="mt-1 text-2xl font-semibold text-zinc-950">
+              {formatNumber(allApplicants.active)}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Key Stats Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-      <!-- Free Spots -->
-      <div class="stat bg-base-100 rounded-box shadow">
-        <div class="stat-figure text-success">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 13l4 4L19 7"></path>
-          </svg>
-        </div>
-        <div class="stat-title">Prosta mesta</div>
-        <div class="stat-value text-success">
-          {formatNumber(allApplications.freeSpots)}
-        </div>
-        <div class="stat-desc">
-          od {formatNumber(allApplications.capacity)} skupaj
-          {
-            freeSpotsChange !== null && freeSpotsChange !== 0 && (
-              <span class={freeSpotsChange > 0 ? "text-success" : "text-error"}>
-                {" "}
-                ({formatChange(freeSpotsChange)})
-              </span>
-            )
-          }
-          {
-            freeSpotsChange === 0 && (
-              <span class="text-base-content/50"> (brez sprememb)</span>
-            )
-          }
-        </div>
-      </div>
+    <section class="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
+      <div class="grid gap-4 md:grid-cols-2">
+        {
+          metricCards.map((metric, index) => {
+            const isNeutral = metric.change === null || metric.change === 0;
+            const isPositive =
+              metric.change !== null &&
+              metric.change !== 0 &&
+              (metric.favorableWhenPositive
+                ? metric.change > 0
+                : metric.change < 0);
 
-      <!-- Active Applications -->
-      <div class="stat bg-base-100 rounded-box shadow">
-        <div class="stat-figure text-warning">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            ></path>
-          </svg>
-        </div>
-        <div class="stat-title">Aktivne prošnje</div>
-        <div class="stat-value text-warning">
-          {formatNumber(allApplications.active)}
-        </div>
-        <div class="stat-desc">
-          {formatNumber(allApplications.registered)} vseh prijav
-          {
-            activeApplicationsChange !== null &&
-              activeApplicationsChange !== 0 && (
-                <span
-                  class={
-                    activeApplicationsChange < 0 ? "text-success" : "text-error"
-                  }
-                >
-                  {" "}
-                  ({formatChange(activeApplicationsChange)})
-                </span>
-              )
-          }
-          {
-            activeApplicationsChange === 0 && (
-              <span class="text-base-content/50"> (brez sprememb)</span>
-            )
-          }
-        </div>
-      </div>
-
-      <!-- Active Applicants -->
-      <div class="stat bg-base-100 rounded-box shadow">
-        <div class="stat-figure text-info">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-            ></path>
-          </svg>
-        </div>
-        <div class="stat-title">Aktivni prosilci</div>
-        <div class="stat-value text-info">
-          {formatNumber(allApplicants.active)}
-        </div>
-        <div class="stat-desc">
-          {formatNumber(allApplicants.registered)} vseh prosilcev
-          {
-            activeApplicantsChange !== null && activeApplicantsChange !== 0 && (
-              <span
-                class={
-                  activeApplicantsChange < 0 ? "text-success" : "text-error"
-                }
+            return (
+              <article
+                class={`rounded-lg border bg-white p-5 transition hover:shadow-sm ${
+                  index === 0
+                    ? "border-amber-200 shadow-[inset_0_3px_0_#f59e0b]"
+                    : "border-sky-200 shadow-[inset_0_3px_0_#0ea5e9]"
+                }`}
               >
-                {" "}
-                ({formatChange(activeApplicantsChange)})
-              </span>
-            )
-          }
-          {
-            activeApplicantsChange === 0 && (
-              <span class="text-base-content/50"> (brez sprememb)</span>
-            )
-          }
-        </div>
+                <div class="flex items-start justify-between gap-4">
+                  <p class="text-sm font-medium text-zinc-500">
+                    {metric.label}
+                  </p>
+                  <span
+                    class={`rounded-full px-2.5 py-1 text-xs font-medium ${
+                      isNeutral
+                        ? "bg-zinc-100 text-zinc-500"
+                        : isPositive
+                          ? "bg-emerald-50 text-emerald-700"
+                          : "bg-amber-50 text-amber-700"
+                    }`}
+                  >
+                    {isNeutral ? "brez sprememb" : formatChange(metric.change)}
+                  </span>
+                </div>
+                <p class="mt-5 text-4xl font-semibold tracking-tight text-zinc-950">
+                  {metric.value}
+                </p>
+                <p class="mt-2 text-sm text-zinc-500">{metric.note}</p>
+              </article>
+            );
+          })
+        }
       </div>
-    </div>
 
-    <!-- Critical Insight -->
-    <div class="card bg-base-100 shadow-xl mb-8 border-l-4 border-error">
-      <div class="card-body">
-        <h2 class="card-title text-error">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div class="mt-8">
+        <section
+          class="rounded-lg border border-emerald-200 bg-[linear-gradient(135deg,#ecfdf5_0%,#ffffff_62%,#eff6ff_100%)] p-6"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-sm font-medium text-emerald-700">Kapacitete</p>
+              <h2
+                class="mt-2 text-4xl font-semibold tracking-tight text-zinc-950"
+              >
+                {formatNumber(occupied)}
+              </h2>
+            </div>
+            <span
+              class="rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium text-white"
+            >
+              {occupancyPercent}% zasedeno
+            </span>
+          </div>
+          <div
+            class="mt-8 h-4 overflow-hidden rounded-full bg-white shadow-inner ring-1 ring-emerald-100"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          Ključni podatek
-        </h2>
-        <div class="text-center py-4">
-          <p class="text-5xl font-bold text-error mb-2">
-            {formatNumber(applicantsPerSpot)}
+            <div
+              class="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500"
+              style={`width: ${occupancyWidth}`}
+            >
+            </div>
+          </div>
+          <div class="mt-4 grid gap-3 text-sm text-zinc-700 sm:grid-cols-3">
+            <p>
+              <span
+                class="block text-xs uppercase tracking-[0.12em] text-zinc-500"
+                >Zasedeno</span
+              >
+              <strong class="text-base text-zinc-950"
+                >{formatNumber(occupied)}</strong
+              >
+            </p>
+            <p>
+              <span
+                class="block text-xs uppercase tracking-[0.12em] text-zinc-500"
+                >Kapaciteta</span
+              >
+              <strong class="text-base text-zinc-950"
+                >{formatNumber(allApplications.capacity)}</strong
+              >
+            </p>
+            <p>
+              <span
+                class="block text-xs uppercase tracking-[0.12em] text-zinc-500"
+                >Razpoložljivo</span
+              >
+              <strong class="text-base text-zinc-950">{freeWidth}</strong>
+            </p>
+          </div>
+          <p
+            class="mt-6 border-t border-emerald-100 pt-5 text-sm leading-6 text-zinc-600"
+          >
+            Aktivne prošnje: <strong class="font-semibold text-zinc-950"
+              >{formatNumber(allApplications.active)}</strong
+            >. Status prikazuje razmerje med zasedenimi kapacitetami in skupno
+            zmogljivostjo.
           </p>
-          <p class="text-lg">aktivnih prosilcev na vsako prosto mesto</p>
-        </div>
-        <p class="text-base-content/70 text-center">
-          Za {formatNumber(allApplications.freeSpots)} prostih mest trenutno čaka
-          {formatNumber(allApplicants.active)} aktivnih prosilcev.
-        </p>
+        </section>
       </div>
-    </div>
+    </section>
 
-    <!-- Additional Insights -->
-    <div class="grid grid-cols-2 gap-4 mb-8">
-      <div class="card bg-base-100 shadow">
-        <div class="card-body">
-          <h3 class="card-title text-sm">Prošenj na dom</h3>
-          <p class="text-3xl font-bold">
-            {formatNumber(avgApplicationsPerFacility)}
-          </p>
-        </div>
-      </div>
-      <div class="card bg-base-100 shadow">
-        <div class="card-body">
-          <h3 class="card-title text-sm">Število domov</h3>
-          <p class="text-3xl font-bold">
-            {regions.reduce((acc, r) => acc + r.facilities.length, 0)}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <Chart />
-
-    <!-- Facilities with Free Spots -->
     {
       facilitiesWithSpots.length > 0 && (
-        <div class="card bg-base-100 shadow-xl mb-8">
-          <div class="card-body">
-            <h2 class="card-title text-success">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              Domovi s prostimi mesti
-            </h2>
-            <div class="overflow-x-auto">
-              <table class="table table-zebra">
-                <thead>
+        <section class="border-y border-emerald-100 bg-emerald-50/40">
+          <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
+            <div class="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <p class="text-sm font-medium uppercase tracking-[0.14em] text-emerald-700">
+                  Razpoložljivost
+                </p>
+                <h2 class="mt-2 text-3xl font-semibold tracking-tight text-zinc-950">
+                  Domovi s prostimi mesti
+                </h2>
+              </div>
+              <p class="text-sm text-zinc-500">
+                {facilitiesWithSpots.length} domov ima evidentirana prosta
+                mesta.
+              </p>
+            </div>
+
+            <div class="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+              <table class="w-full min-w-[640px] text-left text-sm">
+                <thead class="border-b border-zinc-200 bg-white text-xs uppercase tracking-[0.12em] text-zinc-500">
                   <tr>
-                    <th>Dom</th>
-                    <th class="text-right">Mesta</th>
+                    <th class="px-4 py-3 font-medium">Dom</th>
+                    <th class="px-4 py-3 font-medium">Regija</th>
+                    <th class="px-4 py-3 text-right font-medium">Mesta</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-zinc-100">
                   {facilitiesWithSpots.map((f) => (
-                    <tr>
-                      <td class="pe-0">
-                        <div class="mb-2">{f.name}</div>
-                        <div class="badge badge-ghost">{f.region}</div>
+                    <tr class="transition hover:bg-zinc-50">
+                      <td class="px-4 py-4 font-medium text-zinc-950">
+                        {f.name}
                       </td>
-                      <td class="text-right">
-                        <span class="badge badge-success">{f.freeSpots}</span>
+                      <td class="px-4 py-4 text-zinc-500">{f.region}</td>
+                      <td class="px-4 py-4 text-right">
+                        <span class="rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700">
+                          {f.freeSpots}
+                        </span>
                       </td>
                     </tr>
                   ))}
@@ -367,213 +326,234 @@ const formatCurrency = (num: number) =>
               </table>
             </div>
           </div>
-        </div>
+        </section>
       )
     }
 
-    <!-- Regional Breakdown -->
-    <div class="card bg-base-100 shadow-xl mb-8">
-      <div class="card-body">
-        <h2 class="card-title mb-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+    <section class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
+      <div
+        class="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"
+      >
+        <div>
+          <p
+            class="text-sm font-medium uppercase tracking-[0.14em] text-zinc-500"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
-          Zasedenost po regijah
-        </h2>
-        <div class="space-y-2">
-          {
-            regions.map((region) => {
-              const regionOccupied =
-                region.totals.totalApplications.capacity -
-                region.totals.totalApplications.freeSpots;
-              const regionPercent = (
-                (regionOccupied / region.totals.totalApplications.capacity) *
-                100
-              ).toFixed(1);
-              const hasSpots = region.totals.totalApplications.freeSpots > 0;
+            Regije
+          </p>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight text-zinc-950">
+            Zasedenost po regijah
+          </h2>
+        </div>
+        <p class="max-w-md text-sm leading-6 text-zinc-500">
+          Vsaka vrstica prikazuje regijsko zasedenost, prosta mesta in seznam
+          vključenih domov.
+        </p>
+      </div>
 
-              return (
-                <div class="collapse collapse-arrow bg-base-200">
-                  <input type="checkbox" />
-                  <div class="collapse-title font-medium flex items-center gap-4">
-                    <span
-                      class={`badge ${hasSpots ? "badge-success" : "badge-error"}`}
-                    >
-                      {region.totals.totalApplications.freeSpots}
-                    </span>
-                    <span class="flex-1">{region.name}</span>
-                    <span class="text-sm text-base-content/60">
-                      {regionPercent}%
-                    </span>
-                  </div>
-                  <div class="collapse-content">
-                    <div class="overflow-x-auto">
-                      <table class="table table-sm">
-                        <thead>
-                          <tr>
-                            <th>Tip</th>
-                            <th>Ime</th>
-                            <th class="text-right">Kapaciteta</th>
-                            <th class="text-right">Prosto</th>
-                            <th class="text-right">Aktivne prošnje</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {region.facilities.map((f) => (
-                            <tr>
-                              <td>
-                                <span class="badge badge-outline badge-sm">
-                                  {f.type}
-                                </span>
-                              </td>
-                              <td class="max-w-xs truncate">{f.name}</td>
-                              <td class="text-right">{f.capacity}</td>
-                              <td class="text-right">
-                                <span
-                                  class={`badge badge-sm ${f.freeSpots && f.freeSpots > 0 ? "badge-success" : "badge-error"}`}
-                                >
-                                  {f.freeSpots ?? "-"}
-                                </span>
-                              </td>
-                              <td class="text-right">
-                                {typeof f.activeApplications === "number"
-                                  ? formatNumber(f.activeApplications)
-                                  : "-"}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+      <div
+        class="divide-y divide-zinc-200 rounded-lg border border-zinc-200 bg-white"
+      >
+        {
+          regions.map((region) => {
+            const regionOccupied =
+              region.totals.totalApplications.capacity -
+              region.totals.totalApplications.freeSpots;
+            const regionPercent = (
+              (regionOccupied / region.totals.totalApplications.capacity) *
+              100
+            ).toFixed(1);
+            const hasSpots = region.totals.totalApplications.freeSpots > 0;
+
+            return (
+              <details
+                class={`group ${hasSpots ? "bg-emerald-50/55" : "bg-white"}`}
+              >
+                <summary
+                  class={`grid cursor-pointer list-none gap-4 px-4 py-4 transition sm:grid-cols-[minmax(0,1fr)_180px_110px_24px] sm:items-center ${
+                    hasSpots ? "hover:bg-emerald-50" : "hover:bg-zinc-50"
+                  }`}
+                >
+                  <div>
+                    <div class="flex items-center gap-3">
+                      <span
+                        class={`h-2.5 w-2.5 rounded-full ${
+                          hasSpots ? "bg-emerald-500" : "bg-amber-500"
+                        }`}
+                      />
+                      <h3 class="font-medium text-zinc-950">{region.name}</h3>
                     </div>
                   </div>
-                </div>
-              );
-            })
-          }
-        </div>
-      </div>
-    </div>
+                  <p class="text-sm text-zinc-500">
+                    <span class="font-semibold text-zinc-950">
+                      {regionPercent}%
+                    </span>{" "}
+                    zasedeno
+                  </p>
+                  <p class="text-sm text-zinc-500 sm:text-right">
+                    <span class="font-semibold text-zinc-950">
+                      {region.totals.totalApplications.freeSpots}
+                    </span>{" "}
+                    prosto
+                  </p>
+                  <span class="text-zinc-400 transition group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
 
-    <!-- Pricing Comparison -->
+                <div class="border-t border-zinc-100 px-4 pb-4">
+                  <div class="overflow-x-auto">
+                    <table class="w-full min-w-[760px] text-left text-sm">
+                      <thead class="text-xs uppercase tracking-[0.12em] text-zinc-400">
+                        <tr>
+                          <th class="py-3 font-medium">Tip</th>
+                          <th class="py-3 font-medium">Ime</th>
+                          <th class="py-3 text-right font-medium">
+                            Kapaciteta
+                          </th>
+                          <th class="py-3 text-right font-medium">Prosto</th>
+                          <th class="py-3 text-right font-medium">
+                            Aktivne prošnje
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-zinc-100">
+                        {region.facilities.map((f) => (
+                          <tr>
+                            <td class="py-3">
+                              <span class="rounded-full border border-zinc-200 px-2.5 py-1 text-xs text-zinc-500">
+                                {f.type}
+                              </span>
+                            </td>
+                            <td class="max-w-xs py-3 font-medium text-zinc-900">
+                              {f.name}
+                            </td>
+                            <td class="py-3 text-right text-zinc-600">
+                              {f.capacity}
+                            </td>
+                            <td class="py-3 text-right">
+                              <span
+                                class={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                                  f.freeSpots && f.freeSpots > 0
+                                    ? "bg-emerald-50 text-emerald-700"
+                                    : "bg-zinc-100 text-zinc-500"
+                                }`}
+                              >
+                                {f.freeSpots ?? "-"}
+                              </span>
+                            </td>
+                            <td class="py-3 text-right text-zinc-600">
+                              {typeof f.activeApplications === "number"
+                                ? formatNumber(f.activeApplications)
+                                : "-"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </details>
+            );
+          })
+        }
+      </div>
+    </section>
+
     {
       pricingData.length > 0 && (
-        <div class="card bg-base-100 shadow-xl mb-8">
-          <div class="card-body">
-            <h2 class="card-title mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              Primerjava cen
-            </h2>
-
-            <div class="overflow-x-auto">
-              <table class="table table-zebra">
-                <thead>
-                  <tr>
-                    <th>Dom</th>
-                    {Array.from({ length: maxRooms }).map((_, i) => (
-                      <th class="text-center text-xs">
-                        {i === 0
-                          ? "Najcenejša"
-                          : i === maxRooms - 1
-                            ? "Najdražja"
-                            : `${i + 1}. opcija`}
-                      </th>
-                    ))}
-                    {/* <th class="text-center text-xs">Odbitek/dan</th> */}
-                  </tr>
-                </thead>
-                <tbody>
-                  {pricingData.map((facility) => (
-                    <tr>
-                      <td>
-                        <div class="font-bold">{facility.name}</div>
-                        <div class="text-xs text-base-content/60">
-                          {facility.address.city}
-                        </div>
-                      </td>
-                      {Array.from({ length: maxRooms }).map((_, i) => {
-                        const room = facility.room_pricing[i];
-                        return (
-                          <td class="text-center">
-                            {room ? (
-                              <div
-                                class="tooltip tooltip-bottom"
-                                data-tip={room.room_type}
-                              >
-                                <div class="font-bold">
-                                  {formatCurrency(room.monthly_rate)}
-                                </div>
-                                <div class="text-xs text-base-content/60">
-                                  {formatCurrency(room.daily_rate)}/dan
-                                </div>
-                              </div>
-                            ) : (
-                              <span class="text-base-content/40">-</span>
-                            )}
-                          </td>
-                        );
-                      })}
-                      {/* <td class="text-center font-bold text-success">
-                        -{formatCurrency(facility.absence_deduction_daily)}
-                      </td> */}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <section class="border-t border-zinc-200 bg-zinc-50">
+          <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
+            <div class="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <p class="text-sm font-medium uppercase tracking-[0.14em] text-zinc-500">
+                  Stroški
+                </p>
+                <h2 class="mt-2 text-3xl font-semibold tracking-tight text-zinc-950">
+                  Primerjava cen
+                </h2>
+              </div>
+              <p class="max-w-md text-sm leading-6 text-zinc-500">
+                Mesečna cena je izračunana na podlagi 30,417 dni.
+              </p>
             </div>
 
-            <div class="text-sm text-base-content/60 mt-4">
-              <p>* Mesečna cena je izračunana na podlagi 30,417 dni.</p>
+            <div class="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+              <div class="overflow-x-auto">
+                <table class="w-full min-w-[900px] text-left text-sm">
+                  <thead class="border-b border-zinc-200 text-xs uppercase tracking-[0.12em] text-zinc-500">
+                    <tr>
+                      <th class="px-4 py-3 font-medium">Dom</th>
+                      {Array.from({ length: maxRooms }).map((_, i) => (
+                        <th class="px-4 py-3 text-center font-medium">
+                          {i === 0
+                            ? "Najcenejša"
+                            : i === maxRooms - 1
+                              ? "Najdražja"
+                              : `${i + 1}. opcija`}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-zinc-100">
+                    {pricingData.map((facility) => (
+                      <tr class="transition hover:bg-zinc-50">
+                        <td class="px-4 py-4">
+                          <div class="font-semibold text-zinc-950">
+                            {facility.name}
+                          </div>
+                          <div class="mt-1 text-xs text-zinc-500">
+                            {facility.address.city}
+                          </div>
+                        </td>
+                        {Array.from({ length: maxRooms }).map((_, i) => {
+                          const room = facility.room_pricing[i];
+                          return (
+                            <td class="px-4 py-4 text-center">
+                              {room ? (
+                                <div title={room.room_type}>
+                                  <div class="font-semibold text-zinc-950">
+                                    {formatCurrency(room.monthly_rate)}
+                                  </div>
+                                  <div class="mt-1 text-xs text-zinc-500">
+                                    {formatCurrency(room.daily_rate)}/dan
+                                  </div>
+                                </div>
+                              ) : (
+                                <span class="text-zinc-300">-</span>
+                              )}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       )
     }
 
-    <!-- Footer -->
-    <footer class="text-center text-base-content/50 text-sm py-8">
-      <p>Podatki se samodejno posodabljajo dnevno.</p>
-      <p class="mt-1">
-        Vir: <a
-          href={data._metadata.source}
-          class="link link-hover"
-          target="_blank"
-          rel="noopener">{data._metadata.source}</a
-        >
-      </p>
-      <p class="mt-1 text-xs">
-        Zadnja posodobitev: {
-          new Date(data._metadata.extractedAt).toLocaleString("sl-SI")
-        }
-      </p>
+    <footer class="border-t border-zinc-200 bg-white">
+      <div
+        class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-8 text-sm text-zinc-500 sm:px-8 lg:px-10"
+      >
+        <p>Podatki se samodejno posodabljajo dnevno.</p>
+        <p>
+          Vir: <a
+            href={data._metadata.source}
+            class="font-medium text-zinc-950 underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-950"
+            target="_blank"
+            rel="noopener">{data._metadata.source}</a
+          >
+        </p>
+        <p class="text-xs">
+          Zadnja posodobitev: {
+            new Date(data._metadata.extractedAt).toLocaleString("sl-SI")
+          }
+        </p>
+      </div>
     </footer>
-  </div>
+  </main>
 </Layout>

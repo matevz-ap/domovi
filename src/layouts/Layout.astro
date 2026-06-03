@@ -9,7 +9,7 @@ const { title = "Domovi za starejše - Stanje kapacitet" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="sl" data-theme="dark">
+<html lang="sl" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -18,8 +18,9 @@ const { title = "Domovi za starejše - Stanje kapacitet" } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="Pregled zasedenosti domov za starejše v Sloveniji" />
 		<title>{title}</title>
+		<script defer src="https://analytics.mapsoft.net/script.js" data-website-id="7b94233a-1086-4052-b6c7-da93b30d475e"></script>
 	</head>
-	<body class="min-h-screen bg-base-300">
+	<body class="min-h-screen bg-white antialiased">
 		<slot />
 	</body>
 </html>
