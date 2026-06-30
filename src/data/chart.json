@@ -663,5 +663,10 @@
     "date": "2026-06-29",
     "freeSpots": 17,
     "activeApplications": 43604
+  },
+  {
+    "date": "2026-06-30",
+    "freeSpots": 17,
+    "activeApplications": 43622
   }
 ]
